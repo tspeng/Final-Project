@@ -2,15 +2,19 @@
 <html lang="en">
 <head>
     <script src="https://d3js.org/d3.v4.min.js"></script>
-    <svg width="960" height="500"></svg>
+    
 </head>
 <body>
 	<h1> Final project </h1>
+	<svg width="960" height="500"></svg>
 	<script>
 		
 	    d3.csv("https://tspeng.github.io/Final-Project/data/Accidental_Drug_Related_Deaths_2012-2017.csv", function(data) {
 		    console.log(data.length);
-		    for (var i = 0; i < data.length; i++) {
+		    for (var i = 0; i < 1; i++) {
+			    console.log(data[i].Sex);
+			    console.log(data[i].Age);
+			    console.log(data[i].Date);
 		    }
 		});
 		
