@@ -33,7 +33,7 @@
 		
 		
 	    d3.csv("https://tspeng.github.io/Final-Project/data/Accidental_Drug_Related_Deaths_2012-2017.csv", function(data) {
-		    data.foreEach(function(d){
+		    data.forEach(function(d){
 			    d.Date = parseDate(d.Date);
 		    });
 			console.log(data[0].Date);
