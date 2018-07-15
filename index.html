@@ -7,19 +7,37 @@
 <body>
 	<h1> Final project </h1>
 	<svg width="960" height="500"></svg>
-	<script>
+	<script>	
+		var svg = d3.select("svg"),
+		    margin = {top: 20, right: 20, bottom: 30, left: 50},
+		    width = svg.attr("width") - margin.left - margin.right,
+		    height = svg.attr("height") - margin.top - margin.bottom;
+		
+		var parseDate = d3.timeParse("%m/%d/%Y");
+		
+		var x = d3.scaleTime().range([0, width]),
+		    y = d3.scaleLinear().range([height, 0]),
+		    z = d3.scaleOrdinal(d3.schemeCategory10);
+		
+		var stack = d3.stack();
+		
+		var area = d3.area()
+		    .x(function(d, i) { return x(d.data.date); })
+		    .y0(function(d) { return y(d[0]); })
+		    .y1(function(d) { return y(d[1]); });
+		
+		var g = svg.append("g")
+		    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+		
+		
 		
 	    d3.csv("https://tspeng.github.io/Final-Project/data/Accidental_Drug_Related_Deaths_2012-2017.csv", function(data) {
-		    var columns_extracted = data.map(function(d) {
-			  return {
-			    Date: d.Date,
-			    Sex: d.Sex,
-			    Race: d.Race,
-			    Age: d.Age
-			  }
+		    data.foreEach(function(d){
+			    d.date = parseDate(d.date);
+		    }
 			});
-			
-			console.log(columns_extracted);
+			console.log(data[0].date);
 			/*
 		    console.log(data.length);
 		    for (var i = 0; i < 1; i++) {
