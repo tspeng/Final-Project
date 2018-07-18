@@ -31,8 +31,6 @@
 		    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
 		
-		
-		
 	    d3.csv("https://tspeng.github.io/Final-Project/data/Accidental_Drug_Related_Deaths_2012-2017.csv", function(data) {
 		    data.forEach(function(d){
 			    d.Date = parseDate(d.Date);
@@ -47,7 +45,15 @@
 			  	.rollup(function(v) { return v.length; })
 			  	.entries(filtered);
 			
+			var raceCount = d3.nest()
+			  	.key(function(d)    { return d.Race; })
+			  	.rollup(function(v) { return v.length; })
+			  	.entries(filtered);
+			
+			
+			
 			console.log(yearCount);
+			console.log(raceCount);
 			console.log(data[0].Date);
 			console.log(formatTime(data[0].Date));
 			/*
