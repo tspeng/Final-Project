@@ -37,7 +37,7 @@
 		    });
 		    
 		    //Exclude the data without county entry
-		    var filtered = data.filter(function(d) { return d["Residence County"].length!=0; });
+		    var filtered = data.filter(function(d) { return d["Residence County"].length!=0 && d.Sex.length!=0;});
 		    console.log(filtered);
 		    
 			var yearCount = d3.nest()
