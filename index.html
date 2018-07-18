@@ -39,11 +39,12 @@
 		    });
 		    console.log(data);
 		    
+		    var filtered = data.filter(function(d) { return d["Residence County"].length!=0; });
+		    
 			var yearCount = d3.nest()
-				
-			  	.key(function(d) { return formatTime(d.Date); })
+			  	.key(function(d)    { return formatTime(d.Date); })
 			  	.rollup(function(v) { return v.length; })
-			  	.entries(data);
+			  	.entries(filtered);
 			
 			console.log(yearCount);
 			console.log(data[0].Date);
