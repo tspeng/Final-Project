@@ -37,9 +37,10 @@
 		    data.forEach(function(d){
 			    d.Date = parseDate(d.Date);
 		    });
-		    console.log(data);
+		    
 		    
 		    var filtered = data.filter(function(d) { return d["Residence County"].length!=0; });
+		    console.log(filtered);
 		    
 			var yearCount = d3.nest()
 			  	.key(function(d)    { return formatTime(d.Date); })
