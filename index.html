@@ -50,7 +50,7 @@
 			  	.key(function(d)   { return d.Sex; })
 			  	.rollup(function(v) { return v.length; })
 			  	.entries(filtered);
-			var racsexArray=[];  	
+			var racesexArray=[];  	
 			for (var i=0;i<racesexCount.length;i++){
 racesexArray.push({"Race":racesexCount[i].key,"Male":racesexCount[i].values[0].value,"Female":racesexCount[i].values[1].value});
 			}
