@@ -13,8 +13,8 @@
 		    width = svg.attr("width") - margin.left - margin.right,
 		    height = svg.attr("height") - margin.top - margin.bottom;
 		
-		var parseDate = d3.timeParse("%m/%d/%Y");
-		var formatTime = d3.timeFormat("%Y");
+		var parseDate = d3.timeParse("%m/%d/%Y");  //Convert string to Date object
+		var formatTime = d3.timeFormat("%Y");      //Extract the year from Date object
 		
 		var x = d3.scaleTime().range([0, width]),
 		    y = d3.scaleLinear().range([height, 0]),
@@ -37,8 +37,10 @@
 		    data.forEach(function(d){
 			    d.Date = parseDate(d.Date);
 		    });
+		    console.log(data);
 		    
 			var yearCount = d3.nest()
+				
 			  	.key(function(d) { return formatTime(d.Date); })
 			  	.rollup(function(v) { return v.length; })
 			  	.entries(data);
