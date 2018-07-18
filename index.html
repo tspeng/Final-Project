@@ -54,9 +54,19 @@
 			console.log(racesexCount);
 			var racesexArray=[];  	
 			for (var i=0;i<racesexCount.length;i++){
-				console.log(racesexCount[i].values[0].key);
-				console.log(racesexCount[i].values[0].value);
-racesexArray.push({"Race":racesexCount[i].key,"Male":racesexCount[i].values[0].value,"Female":racesexCount[i].values[1].value});
+				var numMale=0;
+				var numFemale=0;
+				if (racesexCount[i].values.length==1){
+					if(racesexCount[i].values[0].key=="Male"){
+						numMale=racesexCount[i].values[0].value;
+					}else{
+						numFemale=racesexCount[i].values[0].value;
+					}
+				}else{
+					numMale=racesexCount[i].values[0].value;
+					numFemale=racesexCount[i].values[1].value;
+				}
+				racesexArray.push({"Race":racesexCount[i].key,"Male":numMale,"Female":numFemale});
 			}
 			
 			console.log(yearCount);
