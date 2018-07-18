@@ -50,13 +50,15 @@
 			  	.key(function(d)   { return d.Sex; })
 			  	.rollup(function(v) { return v.length; })
 			  	.entries(filtered);
+			  	
+			console.log(racesexCount);
 			var racesexArray=[];  	
 			for (var i=0;i<racesexCount.length;i++){
 racesexArray.push({"Race":racesexCount[i].key,"Male":racesexCount[i].values[0].value,"Female":racesexCount[i].values[1].value});
 			}
 			
 			console.log(yearCount);
-			console.log(racesexCount);
+			
 			console.log(racsexArray);
 			console.log(data[0].Date);
 			console.log(formatTime(data[0].Date));
