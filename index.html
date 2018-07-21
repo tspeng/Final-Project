@@ -34,6 +34,7 @@
 		    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
 	    d3.csv("https://tspeng.github.io/Final-Project/data/Accidental_Drug_Related_Deaths_2012-2017.csv", function(data) {
+	    	console.log(typeof data);
 	    	console.log(data.columns)
 		    data.forEach(function(d){
 			    d.Date = parseDate(d.Date);
@@ -54,6 +55,7 @@
 		    
 		    //Exclude the data without county entry
 		    var filtered = data.filter(function(d) { return d["Residence County"].length!=0 && d.Race.length!=0;});
+		    console.log(typeof filtered);
 		    console.log(filtered.columns);
 		    
 			var yearCount = d3.nest()
