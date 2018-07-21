@@ -34,6 +34,8 @@
 		    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
 	    d3.csv("https://tspeng.github.io/Final-Project/data/Accidental_Drug_Related_Deaths_2012-2017.csv", function(data) {
+	    	console.log(data);
+	    	console.log(data.columns)
 		    data.forEach(function(d){
 			    d.Date = parseDate(d.Date);
 			    if (d.Age>=20 && d.Age<30){
