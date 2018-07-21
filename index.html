@@ -67,9 +67,9 @@
 		    var yearCount2 = d3.nest()
 			  	.key(function(d)    { return formatTime(d.Date); })
 			  	.rollup(function(d) { 
-			  		var d2={Date:formatTime(d.Date)}
+			  		var d2={Date:formatTime(d[0].Date),"20s":0,"30s":0,"40s":0,"50s":0,"60s":0,"Others":0}
 			  		d.forEach(function(d){
-			  			d2[d.AgeGroup]=1;
+			  			d2[d.AgeGroup]=d2[d.AgeGroup]+1;
 			  		})
 			  		console.log("rollup d",d,d2)
 			  		return d2; 
