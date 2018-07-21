@@ -62,7 +62,22 @@
 			  	.key(function(d)    { return formatTime(d.Date); })
 			  	.rollup(function(v) { return v.length; })
 			  	.entries(filtered);
-
+			console.log(yearCount);
+			
+		    var yearCount2 = d3.nest()
+			  	.key(function(d)    { return formatTime(d.Date); })
+			  	.rollup(function(d) { 
+			  		var d2={Date:formatTime(d.Date)}
+			  		d.forEach(function(d){
+			  			d2[d.AgeGroup]=1;
+			  		})
+			  		consol.log("rollup d",d,d2)
+			  		return d2; 
+			  	})
+			  	.entries(filtered);
+			  	
+			console.log(yearCount2);
+			
 			var racesexCount = d3.nest()
 			  	.key(function(d)   { return d.Race; })
 			  	.key(function(d)   { return d.Sex; })
@@ -84,7 +99,7 @@
 					numMale=racesexCount[i].values[0].value;
 					numFemale=racesexCount[i].values[1].value;
 				}
-				racesexArray.push({"Race":racesexCount[i].key,"Male":numMale,"Female":numFemale,"Total":numMale+numFemale});
+				racesexArray.push({"Race":racesexCount[i].key,"Male":numMale,"Female":numFemale});
 			}
 			
 			console.log(racesexArray);
