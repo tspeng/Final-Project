@@ -84,7 +84,8 @@
 				racesexArray.push({"Race":racesexCount[i].key,"Male":numMale,"Female":numFemale,"Total":numMale+numFemale});
 			}
 			
-			var keys = racesexArray.columns.slice(1);
+			console.log(racesexArray.columns);
+			var keys=["Male","Female"]
 			
 			racesexArray.sort(function(a, b) { return b.total - a.total; });
 			x.domain(racesexArray.map(function(d) { return d.Race; }));
