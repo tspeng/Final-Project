@@ -30,12 +30,15 @@ var z = d3.scaleOrdinal()
 d3.csv("https://tspeng.github.io/Final-Project/data/data.csv", function(d, i, columns) {
   for (i = 1, t = 0; i < columns.length; ++i) t += d[columns[i]] = +d[columns[i]];
   d.total = t;
+  d.total2=2*t;
   return d;
 }, function(error, data) {
   if (error) throw error;
   
   console.log("data before sort",data);
-
+  
+  console.log(data.columns);
+	
   var keys = data.columns.slice(1);
   console.log("Column names",keys);
 
