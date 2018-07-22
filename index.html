@@ -91,15 +91,13 @@
 		  svg1.append("g")
 			  .attr("class", "counties")
 			.selectAll("path")
-			.data(topojson.feature(us, us.objects.counties).features)
+			.data(topojson.feature(us, us.objects.counties).features.filter(function(d) { return d.objects.states.id == "06"; }))
 			.enter().append("path")
 			  .attr("d", path);
 			  
 		  svg1.append("path")
 			  .attr("class", "county-borders")
 			  .attr("d", path(topojson.mesh(us, us.objects.counties, function(a, b) { return a !== b; })));
-      
-      
 		});
 
 	    d3.csv("https://tspeng.github.io/Final-Project/data/Accidental_Drug_Related_Deaths_2012-2017.csv", function(data) {
