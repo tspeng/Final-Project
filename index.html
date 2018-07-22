@@ -19,8 +19,11 @@
 		var parseDate = d3.timeParse("%m/%d/%Y");  //Convert string to Date object
 		var formatTime = d3.timeFormat("%Y");      //Extract the year from Date object
 		
-		var x = d3.scaleTime().range([0, width]),
-		    y = d3.scaleLinear().range([height, 0]),
+		var x = d3.scaleTime()
+				.range([0, width])
+				.paddingInner(0.1);
+				
+		var y = d3.scaleLinear().range([height, 0]),
 		    z = d3.scaleOrdinal(d3.schemeCategory10)
 		    	.range(["#98abc5", "#8a89a6", "#7b6888", "#6b486b", "#a05d56", "#d0743c", "#ff8c00"]);
 		
@@ -35,6 +38,8 @@
 		    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
 	    d3.csv("https://tspeng.github.io/Final-Project/data/Accidental_Drug_Related_Deaths_2012-2017.csv", function(data) {
+
+			
 	    	console.log(typeof data);
 	    	console.log(data.columns)
 		    data.forEach(function(d){
@@ -67,6 +72,14 @@
 			  		return d2; 
 			  	})
 			  	.entries(filtered);
+			
+			x.domain(data.map(function(d) { return formatTime(d.Date);}))
+				.rangeRound([0, x.bandwidth()])
+				.padding(0.2);
+				
+			z.domain(data.map(function(d) { return d.AgeGroup; }))
+			var keys = z.domain()
+			
 			
 			var stackData=stack.keys(keys)(yearCount)
 			
