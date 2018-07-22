@@ -88,7 +88,7 @@
 				.rangeRound([0, x.bandwidth()])
 				.padding(0.2);
 				
-			z.domain(data.map(function(d) { return d.Sex; }))
+			z.domain(filtered.map(function(d) { return d.Sex; }))
 			var keys = z.domain()
 
 			var stackData=racesexCount;
