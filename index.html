@@ -80,7 +80,8 @@
 			z.domain(data.map(function(d) { return d.AgeGroup; }))
 			var keys = z.domain()
 
-			var stackData=stack(yearCount)
+			var stackData=yearCount
+			console.log(yearCount.keys);
 			
 			console.log('stackData',stackData)
 			console.log("keys",keys)
