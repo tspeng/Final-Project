@@ -53,8 +53,7 @@
     		.scale(4500)
     		.translate([width / 2, height / 2]);
     		
-    	var path = d3.geoPath()
-    		.projection(projection);
+    	var path = d3.geoPath();
 		
 		d3.json("https://raw.githubusercontent.com/geary/polygonzo/master/shapes/json/ct-counties.json", function(error, ct) {
 		  if (error) throw error;
