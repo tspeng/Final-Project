@@ -73,6 +73,7 @@
 			for (var i=0;i<yearageCount0.length;i++){
 				yearageCount.push(yearageCount0[i].value)
 			}
+			console.log(yearageCount);
 						
 			var racesexCount0 = d3.nest()
 			  	.key(function(d)   { d.Race; })
@@ -87,7 +88,7 @@
 			  	.entries(filtered);
 			  	
 			racesexCount=[]
-			for (var i=0;i<racesexCount.length;i++){
+			for (var i=0;i<racesexCount0.length;i++){
 				racesexCount.push(racesexCount0[i].value)
 			}
 			console.log(racesexCount);
