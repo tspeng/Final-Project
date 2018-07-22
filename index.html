@@ -89,6 +89,9 @@
   			y.domain([0, d3.max(racesexCount, function(d) { return d.total; })]).nice();
   			z.domain(keys);
 			
+			console.log(d3.stack().keys(keys)(racesexCount));
+			
+			
 			 g1.append("g")
 				.selectAll("g")
 				.data(d3.stack().keys(keys)(racesexCount))
