@@ -19,7 +19,7 @@
 
 <head>
     <script src="https://d3js.org/d3.v4.min.js"></script>
-    <script src="https://d3js.org/topojson.v1.min.js"></script>
+    <script src="https://d3js.org/topojson.v2.min.js"></script>
 </head>
 <body>
 	<h1> Final project: Interactive slideshow </h1>
@@ -84,7 +84,7 @@
 
 		  svg1.append("path")
 			  .attr("class", "county-borders")
-			  .attr("d", path(topojson.mesh(ct, ct.features,function(a, b) { return a !== b; } ) ));
+			  .attr("d", path(topojson.mesh(ct, ct.features,function(a, b) { return a !== b; }) ));
 		});
 
 	    d3.csv("https://tspeng.github.io/Final-Project/data/Accidental_Drug_Related_Deaths_2012-2017.csv", function(data) {
