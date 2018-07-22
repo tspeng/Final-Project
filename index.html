@@ -58,7 +58,7 @@
 		    var filtered = data.filter(function(d) { return (d["Residence County"].length!=0 && d.Race.length!=0 && d.Sex.length!=0);});
 		    
 		    var yearageCount0 = d3.nest()
-			  	.key(function(d)    { formatTime(d.Date); })
+			  	.key(function(d)    { return formatTime(d.Date); })
 			  	.rollup(function(d) { 
 			  		var d2={Date:formatTime(d[0].Date),"20s":0,"30s":0,"40s":0,"50s":0,"60s":0,"Others":0}
 			  		d.forEach(function(d){
@@ -76,7 +76,7 @@
 			console.log(yearageCount);
 						
 			var racesexCount0 = d3.nest()
-			  	.key(function(d)   { d.Race; })
+			  	.key(function(d)   { return d.Race; })
 			  	.rollup(function(d){
 			  		var d2={"Race":d[0].Race,"Male":0,"Female":0}
 			  		d.forEach(function(d){
