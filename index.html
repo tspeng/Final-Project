@@ -18,8 +18,8 @@
 		    
 		var svg2 = d3.select("#scene2"),
 		    margin = {top: 50, right: 50, bottom: 50, left: 50},
-		    width = svg1.attr("width") - margin.left - margin.right,
-		    height = svg1.attr("height") - margin.top - margin.bottom;
+		    width = svg2.attr("width") - margin.left - margin.right,
+		    height = svg2.attr("height") - margin.top - margin.bottom;
 		
 		var parseDate = d3.timeParse("%m/%d/%Y");  //Convert string to Date object
 		var formatTime = d3.timeFormat("%Y");      //Extract the year from Date object
@@ -160,7 +160,7 @@
   
       
 			keys=["Male","Female"];
-			racesexCount.sort(function(a,b) {return b.total-a.total;})
+			racesexCount.sort(function(a,b) {return a.total-b.total;})
 			x.domain(racesexCount.map(function(d) { return d.Race; }));
   			y.domain([0, d3.max(racesexCount, function(d) { return d.total; })]).nice();
   			z.domain(keys);
