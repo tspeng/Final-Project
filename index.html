@@ -89,7 +89,7 @@ path {
 		  if (error) throw error;
 		  
 		  var states = topojson.feature(us, us.objects.states),
-      	  state = states.features.filter(function(d) { return d.id === 06; })[0];
+      	  	state = states.features.filter(function(d) { return d.id === 06; })[0];
       	  
       	 projection.scale(1)
         	.translate([0, 0]);
@@ -102,8 +102,9 @@ path {
     		.translate(t);
 		 
 		svg1.append("path")
-			.attr("class", "mesh")
-			.attr("d", path(topojson.mesh(us, us.objects.states, function(a, b) { return a !== b; }))); 
+			  .datum(topojson.mesh(us, us.objects.states, function(a, b) { return a !== b; }))
+			  .attr("class", "mesh")
+			  .attr("d", path)
 		
 		svg1.append("path")
       		.datum(state)
