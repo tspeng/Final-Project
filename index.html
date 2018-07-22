@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <script src="https://d3js.org/d3.v4.min.js"></script>
-    
+    <script src="https://d3js.org/topojson.v2.min.js"></script>
 </head>
 <body>
 	<h1> Final project: Interactive slideshow </h1>
@@ -20,6 +20,11 @@
 		    margin = {top: 50, right: 50, bottom: 50, left: 50},
 		    width = svg2.attr("width") - margin.left - margin.right,
 		    height = svg2.attr("height") - margin.top - margin.bottom;
+		    
+		var svg3 = d3.select("#scene3"),
+		    margin = {top: 50, right: 50, bottom: 50, left: 50},
+		    width = svg3.attr("width") - margin.left - margin.right,
+		    height = svg3.attr("height") - margin.top - margin.bottom;
 		
 		var parseDate = d3.timeParse("%m/%d/%Y");  //Convert string to Date object
 		var formatTime = d3.timeFormat("%Y");      //Extract the year from Date object
@@ -36,10 +41,28 @@
 		
 		var g1 = svg1.append("g")
 		    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-
 		
 		var g2 = svg2.append("g")
 		    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+		var g3 = svg3.append("g")
+		    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+		    
+		var path = d3.geoPath();
+
+		d3.json("https://d3js.org/us-10m.v1.json", function(error, us) {
+		  if (error) throw error;
+
+		  svg1.append("g")
+			  .attr("class", "counties")
+			.selectAll("path")
+			.data(topojson.feature(us, us.objects.counties).features)
+			.enter().append("path")
+			  .attr("d", path);
+
+		  svg1.append("path")
+			  .attr("class", "county-borders")
+			  .attr("d", path(topojson.mesh(us, us.objects.counties, function(a, b) { return a !== b; })));
+		});
 
 	    d3.csv("https://tspeng.github.io/Final-Project/data/Accidental_Drug_Related_Deaths_2012-2017.csv", function(data) {
 
@@ -60,9 +83,28 @@
 			    }
 		    });
 		    
-		    //Exclude the data without county entry
+		    //Exclude the data without residence County
 		    var filtered = data.filter(function(d) { return (d["Residence County"].length!=0 && d.Race.length!=0 && d.Sex.length!=0);});
 		    
+		    var countyCount = d3.nest()
+			  	.key(function(d)    { return d["Residence County"]; })
+			  	.rollup(function(d) { 
+			  		var d2={Date:formatTime(d[0].Date),"20s":0,"30s":0,"40s":0,"50s":0,"60s":0,"Others":0}
+			  		d.forEach(function(d){
+			  			d2[d.AgeGroup]=d2[d.AgeGroup]+1;
+			  		})
+			  		d2.total=d.length;
+			  		return d2; 
+			  	})
+			  	.entries(filtered);
+			
+			yearageCount=[]
+			for (var i=0;i<yearageCount0.length;i++){
+				yearageCount.push(yearageCount0[i].value)
+			}
+			console.log(yearageCount);
+		    
+
 		    var yearageCount0 = d3.nest()
 			  	.key(function(d)    { return formatTime(d.Date); })
 			  	.rollup(function(d) { 
@@ -99,7 +141,7 @@
 			}
 			console.log(racesexCount);
 			
-			
+			//Reference: https://bl.ocks.org/mbostock/3886208
 			
 			keys=["20s","30s","40s","50s","60s","Others"];
 			yearageCount.sort(function(a,b) {return a.total-b.total;})
@@ -110,7 +152,7 @@
 			console.log(d3.stack().keys(keys)(yearageCount));
 			
 			
-			 g1.append("g")
+			 g2.append("g")
 				.selectAll("g")
 				.data(d3.stack().keys(keys)(yearageCount))
 				.enter().append("g")
@@ -119,63 +161,6 @@
 				.data(function(d) { return d; })
 				.enter().append("rect")
 				  .attr("x", function(d) { return x(d.data.Date); })
-				  .attr("y", function(d) { return y(d[1]); })
-				  .attr("height", function(d) { return y(d[0]) - y(d[1]); })
-				  .attr("width", x.bandwidth());
-			g1.append("g")
-				  .attr("class", "axis")
-				  .attr("transform", "translate(0," + height + ")")
-				  .call(d3.axisBottom(x));
-		  	g1.append("g")
-			  	.attr("class", "axis")
-			  	.call(d3.axisLeft(y).ticks(null, "s"))
-				.append("text")
-			  	.attr("x", 2)
-			  	.attr("y", y(y.ticks().pop()) + 0.5)
-			  	.attr("dy", "0.32em")
-			  	.attr("fill", "#000")
-			  	.attr("font-weight", "bold")
-			  	.attr("text-anchor", "start")
-			  	.text("Population");
-		  	var legend = g1.append("g")
-			  	.attr("font-family", "sans-serif")
-			  	.attr("font-size", 10)
-			  	.attr("text-anchor", "end")
-			.selectAll("g")
-			.data(keys.slice().reverse())
-			.enter().append("g")
-			  	.attr("transform", function(d, i) { return "translate(0," + i * 20 + ")"; });
-		  	legend.append("rect")
-			  	.attr("x", width - 19)
-			 	 .attr("width", 19)
-			  	.attr("height", 19)
-			  	.attr("fill", z);
-		  	legend.append("text")
-			  	.attr("x", width - 24)
-			  	.attr("y", 9.5)
-			  	.attr("dy", "0.32em")
-			  	.text(function(d) { return d; });
-  
-  
-  
-      
-			keys=["Male","Female"];
-			racesexCount.sort(function(a,b) {return a.total-b.total;})
-			x.domain(racesexCount.map(function(d) { return d.Race; }));
-  			y.domain([0, d3.max(racesexCount, function(d) { return d.total; })]).nice();
-  			z.domain(keys);
-			
-			console.log(d3.stack().keys(keys)(racesexCount));
-
-			 g2.append("g")
-				.selectAll("g")
-				.data(d3.stack().keys(keys)(racesexCount))
-				.enter().append("g")
-				  .attr("fill", function(d) { return z(d.key); })
-				.selectAll("rect")
-				.data(function(d) { return d; })
-				.enter().append("rect")
-				  .attr("x", function(d) { return x(d.data.Race); })
 				  .attr("y", function(d) { return y(d[1]); })
 				  .attr("height", function(d) { return y(d[0]) - y(d[1]); })
 				  .attr("width", x.bandwidth());
@@ -212,7 +197,63 @@
 			  	.attr("y", 9.5)
 			  	.attr("dy", "0.32em")
 			  	.text(function(d) { return d; });
+  
+  
+  
+      
+			keys=["Male","Female"];
+			racesexCount.sort(function(a,b) {return a.total-b.total;})
+			x.domain(racesexCount.map(function(d) { return d.Race; }));
+  			y.domain([0, d3.max(racesexCount, function(d) { return d.total; })]).nice();
+  			z.domain(keys);
+			
+			console.log(d3.stack().keys(keys)(racesexCount));
 
+			 g3.append("g")
+				.selectAll("g")
+				.data(d3.stack().keys(keys)(racesexCount))
+				.enter().append("g")
+				  .attr("fill", function(d) { return z(d.key); })
+				.selectAll("rect")
+				.data(function(d) { return d; })
+				.enter().append("rect")
+				  .attr("x", function(d) { return x(d.data.Race); })
+				  .attr("y", function(d) { return y(d[1]); })
+				  .attr("height", function(d) { return y(d[0]) - y(d[1]); })
+				  .attr("width", x.bandwidth());
+			g3.append("g")
+				  .attr("class", "axis")
+				  .attr("transform", "translate(0," + height + ")")
+				  .call(d3.axisBottom(x));
+		  	g3.append("g")
+			  	.attr("class", "axis")
+			  	.call(d3.axisLeft(y).ticks(null, "s"))
+				.append("text")
+			  	.attr("x", 2)
+			  	.attr("y", y(y.ticks().pop()) + 0.5)
+			  	.attr("dy", "0.32em")
+			  	.attr("fill", "#000")
+			  	.attr("font-weight", "bold")
+			  	.attr("text-anchor", "start")
+			  	.text("Population");
+		  	var legend = g3.append("g")
+			  	.attr("font-family", "sans-serif")
+			  	.attr("font-size", 10)
+			  	.attr("text-anchor", "end")
+			.selectAll("g")
+			.data(keys.slice().reverse())
+			.enter().append("g")
+			  	.attr("transform", function(d, i) { return "translate(0," + i * 20 + ")"; });
+		  	legend.append("rect")
+			  	.attr("x", width - 19)
+			 	 .attr("width", 19)
+			  	.attr("height", 19)
+			  	.attr("fill", z);
+		  	legend.append("text")
+			  	.attr("x", width - 24)
+			  	.attr("y", 9.5)
+			  	.attr("dy", "0.32em")
+			  	.text(function(d) { return d; });
 		});
 
 	</script>
