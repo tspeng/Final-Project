@@ -103,35 +103,28 @@ path {
 		 
 		svg1.append("path")
 			.attr("class", "mesh")
-			.attr("d", path(topojson.mesh(us, us.objects.counties, function(a, b) { return a !== b; }))); 
+			.attr("d", path(topojson.mesh(us, us.objects.states, function(a, b) { return a !== b; }))); 
 		
 		svg1.append("path")
       		.datum(state)
       		.attr("class", "outline")
       		.attr("d", path)
       		.attr('id', 'land');  
-		  
-		  
-		  svg1.append("g")
-			  .attr("class", "counties")
-			.selectAll("path")
-			.data(topojson.feature(us, us.objects.counties).features)
-			.enter().append("path")
-			  .attr("d", path);
-			  
-		  svg1.append("clipPath")
-			  .attr("id", "clip-land")
-			  .append("use")
-			  .attr("xlink:href", "#land");
 
-		  svg1.selectAll("path")
-			  .data(topojson.feature(us, us.objects.counties).features)
-			  .enter().append("path")
-			  .attr("d", path)
-			  .attr('county-id', function(d){
-				 return d.id
-			  }).attr("clip-path", "url(#clip-land)")
-			  .attr('class', 'county');
+	  svg1.append("clipPath")
+		  .attr("id", "clip-land")
+		  .append("use")
+		  .attr("xlink:href", "#land");
+
+	  svg1.selectAll("path")
+		  .data(topojson.feature(us, us.objects.counties).features)
+		  .enter().append("path")
+		  .attr("d", path)
+		  .attr('county-id', function(d){
+			 return d.id
+		  }).attr("clip-path", "url(#clip-land)")
+		  .attr('class', 'county');
+		  
 		});
 
 	    d3.csv("https://tspeng.github.io/Final-Project/data/Accidental_Drug_Related_Deaths_2012-2017.csv", function(data) {
