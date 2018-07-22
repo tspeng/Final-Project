@@ -19,7 +19,7 @@
 		var parseDate = d3.timeParse("%m/%d/%Y");  //Convert string to Date object
 		var formatTime = d3.timeFormat("%Y");      //Extract the year from Date object
 		
-		var x = d3.scaleTime()
+		var x = d3.scaleBand()
 				.range([0, width])
 				.paddingInner(0.1);
 				
