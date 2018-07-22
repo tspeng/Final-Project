@@ -81,69 +81,63 @@
 			  	})
 			  	.entries(filtered);
 			
-			x.domain(data.map(function(d) { return d.Race;}))
-				.rangeRound([0, x.bandwidth()])
-				.padding(0.2);
-				
-			z.domain(filtered.map(function(d) { return d.Sex; }))
-			var keys = z.domain()
-
-			var stackData=racesexCount;
 			
-			console.log('stackData',stackData)
-			console.log("keys",keys)
+			keys=["Male","Female"];
 			
-			var serie = g1.selectAll(".serie")
-    		.data(stackData)
-    		.enter().append("g")
-      		.attr("class", "serie")
-      		.attr("fill", function(d) { return z(d.key); });
+			racesexCount.sort(function(a,b) {return b.total-a.total;})
+			x.domain(racesexCount.map(function(d) { return d.Race; }));
+  			y.domain([0, d3.max(racesexCount, function(d) { return d.total; })]).nice();
+  			z.domain(keys);
 			
-			serie.selectAll("rect")
+			 g.append("g")
+				.selectAll("g")
+				.data(d3.stack().keys(keys)(racesexCount))
+				.enter().append("g")
+				  .attr("fill", function(d) { return z(d.key); })
+				.selectAll("rect")
 				.data(function(d) { return d; })
 				.enter().append("rect")
-					.attr("class", "serie-rect")
-					.attr("transform", function(d) { return "translate(" + x(d.data.Date) + ",0)"; })
-				  .attr("x", function(d) { return x1(d.data.Year); })
+				  .attr("x", function(d) { return x(d.data.Race); })
 				  .attr("y", function(d) { return y(d[1]); })
 				  .attr("height", function(d) { return y(d[0]) - y(d[1]); })
-				  .attr("width", x1.bandwidth())
-					.on("click", function(d, i){ console.log("serie-rect click d", i, d); });
-			
-			console.log(yearCount2);
-
-			  	
-			console.log(racesexCount);
-			
-			var racesexArray=[];  	
-			for (var i=0;i<racesexCount.length;i++){
-				var numMale=0;
-				var numFemale=0;
-				if (racesexCount[i].values.length==1){
-					if(racesexCount[i].values[0].key=="Male"){
-						numMale=racesexCount[i].values[0].value;
-					}else{
-						numFemale=racesexCount[i].values[0].value;
-					}
-				}else{
-					numMale=racesexCount[i].values[0].value;
-					numFemale=racesexCount[i].values[1].value;
-				}
-				racesexArray.push({"Race":racesexCount[i].key,"Male":numMale,"Female":numFemale});
-			}
-			
-			console.log(yearageCount);
-			console.log(racesexArray);
-			console.log(data[0].Date);
-			console.log(formatTime(data[0].Date));
+				  .attr("width", x.bandwidth());
+			g.append("g")
+				  .attr("class", "axis")
+				  .attr("transform", "translate(0," + height + ")")
+				  .call(d3.axisBottom(x));
+			  g.append("g")
+				  .attr("class", "axis")
+				  .call(d3.axisLeft(y).ticks(null, "s"))
+				.append("text")
+				  .attr("x", 2)
+				  .attr("y", y(y.ticks().pop()) + 0.5)
+				  .attr("dy", "0.32em")
+				  .attr("fill", "#000")
+				  .attr("font-weight", "bold")
+				  .attr("text-anchor", "start")
+				  .text("Population");
+			  var legend = g.append("g")
+				  .attr("font-family", "sans-serif")
+				  .attr("font-size", 10)
+				  .attr("text-anchor", "end")
+				.selectAll("g")
+				.data(keys.slice().reverse())
+				.enter().append("g")
+				  .attr("transform", function(d, i) { return "translate(0," + i * 20 + ")"; });
+			  legend.append("rect")
+				  .attr("x", width - 19)
+				  .attr("width", 19)
+				  .attr("height", 19)
+				  .attr("fill", z);
+			  legend.append("text")
+				  .attr("x", width - 24)
+				  .attr("y", 9.5)
+				  .attr("dy", "0.32em")
+				  .text(function(d) { return d; });
+	  
+      
 		});
-		
-		
-		
-		
-		
-		
-		
+
 	</script>
 </body>
 </html>
