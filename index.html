@@ -2,17 +2,32 @@
 <html lang="en">
 <style>
 
-.counties :hover {
-  fill: red;
+.outline {
+  fill: none;
+  stroke: #000;
+  stroke-width: 1.5px;
 }
 
-.county-borders {
+.feature {
+  fill: #ccc;
+}
+
+.mesh {
   fill: none;
   stroke: #fff;
-  stroke-width: 0.5px;
+  stroke-width: .5px;
   stroke-linejoin: round;
-  stroke-linecap: round;
-  pointer-events: none;
+}
+
+path {
+  fill: #ccc;
+  stroke: #fff;
+  stroke-width: .5px;
+}
+.county:hover{
+  fill:orange;
+}
+
 }
 
 </style>
@@ -65,39 +80,58 @@
 		    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 		    
 		
-		var projection = d3.geoAlbers()	
-		    .center([-72.7151064,41.7656821])
-    		.scale(4500)
-    		.translate([width / 2, height / 2]);
+		var projection = d3.geoAlbers();
     		
-    	var path = d3.geoPath();
-		/*
-		d3.json("https://raw.githubusercontent.com/geary/polygonzo/master/shapes/json/ct-counties.json", function(error, ct) {
-		  if (error) throw error;
-
-		  svg1.append("g")
-			  .attr("class", "counties")
-			.selectAll("path")
-			.data(ct.features)
-			.enter().append("path")
-			  .attr("d", path)
-		  
-		  svg1.append("path")
-			  .attr("class", "county-borders")
-			  .attr("d", path(topojson.mesh(ct, ct.features, function(a, b) { return a !== b; }) ));*/
-		
+    	var path = d3.geoPath()
+    		.projection(projection);
+    		
 		d3.json("https://d3js.org/us-10m.v1.json", function(error, us) {
 		  if (error) throw error;
+		  
+		  var states = topojson.feature(us, us.objects.states),
+      	  state = states.features.filter(function(d) { return d.id === 06; })[0];
+      	  
+      	 projection.scale(1)
+        	.translate([0, 0]);
+ 
+  		var b = path.bounds(state),
+    		s = .95 / Math.max((b[1][0] - b[0][0]) / width, (b[1][1] - b[0][1]) / height),
+    		t = [(width - s * (b[1][0] + b[0][0])) / 2, (height - s * (b[1][1] + b[0][1])) / 2];
+ 
+  		projection.scale(s)
+    		.translate(t);
+		 
+		svg1.append("path")
+			.attr("class", "mesh")
+			.attr("d", path(topojson.mesh(us, us.objects.counties, function(a, b) { return a !== b; }))); 
+		
+		svg1.append("path")
+      		.datum(state)
+      		.attr("class", "outline")
+      		.attr("d", path)
+      		.attr('id', 'land');  
+		  
+		  
 		  svg1.append("g")
 			  .attr("class", "counties")
 			.selectAll("path")
-			.data(topojson.feature(us, us.objects.counties).features.filter(function(d) { return d.objects.states.id == "06"; }))
+			.data(topojson.feature(us, us.objects.counties).features)
 			.enter().append("path")
 			  .attr("d", path);
 			  
-		  svg1.append("path")
-			  .attr("class", "county-borders")
-			  .attr("d", path(topojson.mesh(us, us.objects.counties, function(a, b) { return a !== b; })));
+		  svg1.append("clipPath")
+			  .attr("id", "clip-land")
+			  .append("use")
+			  .attr("xlink:href", "#land");
+
+		  svg1.selectAll("path")
+			  .data(topojson.feature(us, us.objects.counties).features)
+			  .enter().append("path")
+			  .attr("d", path)
+			  .attr('county-id', function(d){
+				 return d.id
+			  }).attr("clip-path", "url(#clip-land)")
+			  .attr('class', 'county');
 		});
 
 	    d3.csv("https://tspeng.github.io/Final-Project/data/Accidental_Drug_Related_Deaths_2012-2017.csv", function(data) {
