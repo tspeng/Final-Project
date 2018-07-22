@@ -62,7 +62,7 @@
 		    //Exclude the data without county entry
 		    var filtered = data.filter(function(d) { return d["Residence County"].length!=0 && d.Race.length!=0;});
 		    
-		    var yearCount = d3.nest()
+		    var yearageCount = d3.nest()
 			  	.key(function(d)    { return formatTime(d.Date); })
 			  	.rollup(function(d) { 
 			  		var d2={Date:formatTime(d[0].Date),"20s":0,"30s":0,"40s":0,"50s":0,"60s":0,"Others":0}
@@ -72,16 +72,26 @@
 			  		return d2; 
 			  	})
 			  	.entries(filtered);
+						
+			var racesexCount = d3.nest()
+			  	.key(function(d)   { return d.Race; })
+			  	.rollup(function(d){
+			  		var d2={"Race":d[0].Race,"Male":0,"Female":0}
+			  		d.forEach(function(d){
+			  			d2[d.Sex]=d2[d.Sex]+1;
+			  		})
+			  	return d2; 
+			  	})
+			  	.entries(filtered);
 			
-			x.domain(data.map(function(d) { return formatTime(d.Date);}))
+			x.domain(data.map(function(d) { return d.Race;}))
 				.rangeRound([0, x.bandwidth()])
 				.padding(0.2);
 				
-			z.domain(data.map(function(d) { return d.AgeGroup; }))
+			z.domain(data.map(function(d) { return d.Sex; }))
 			var keys = z.domain()
 
-			var stackData=yearCount
-			console.log(yearCount.keys);
+			var stackData=racesexCount;
 			
 			console.log('stackData',stackData)
 			console.log("keys",keys)
@@ -104,17 +114,7 @@
 					.on("click", function(d, i){ console.log("serie-rect click d", i, d); });
 			
 			console.log(yearCount2);
-			
-			var racesexCount = d3.nest()
-			  	.key(function(d)   { return d.Race; })
-			  	.rollup(function(d){
-			  		var d2={"Race":d[0].Race,"Male":0,"Female":0}
-			  		d.forEach(function(d){
-			  			d2[d.Sex]=d2[d.Sex]+1;
-			  		})
-			  	return d2; 
-			  	})
-			  	.entries(filtered);
+
 			  	
 			console.log(racesexCount);
 			
@@ -135,7 +135,7 @@
 				racesexArray.push({"Race":racesexCount[i].key,"Male":numMale,"Female":numFemale});
 			}
 			
-			console.log(yearCount);
+			console.log(yearageCount);
 			console.log(racesexArray);
 			console.log(data[0].Date);
 			console.log(formatTime(data[0].Date));
