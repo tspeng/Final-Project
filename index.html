@@ -48,7 +48,7 @@
 		    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 		    
 		var path = d3.geoPath();
-		var projection = d3.geoAlbers;
+		var projection = d3.geoAlbers();
 		
 		d3.json("https://d3js.org/us-10m.v1.json", function(error, us) {
 		  if (error) throw error;
