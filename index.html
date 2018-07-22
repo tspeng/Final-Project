@@ -69,7 +69,7 @@
 		  svg1.append("path")
 			  .attr("class", "county-borders")
 			  .datum(topojson.mesh(ct, ct.arcs, ))
-			  .attr("d", path));
+			  .attr("d", path);
 		});
 
 	    d3.csv("https://tspeng.github.io/Final-Project/data/Accidental_Drug_Related_Deaths_2012-2017.csv", function(data) {
