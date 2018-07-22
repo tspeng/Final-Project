@@ -81,6 +81,12 @@ path {
 		    
 		
 		var projection = d3.geoAlbers();
+		
+		
+		var projection = d3.geoMercator()
+		  .scale(2000)
+		  .center([-72.7151922,41.7656821])
+		  .translate([width/2,height/2]);
     		
     	var path = d3.geoPath()
     		.projection(projection);
