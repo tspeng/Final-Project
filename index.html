@@ -54,11 +54,11 @@
 
 		  svg1.append("g")
 			  .attr("class", "counties")
-			  .attr("transform", "translate(800,250)scale(3)")
 			.selectAll("path")
 			.data(topojson.feature(us, us.objects.counties).features)
 			.enter().append("path")
 			  .attr("d", path);
+			  .attr("transform", "translate(800,250)scale(3)")
 
 		  svg1.append("path")
 			  .attr("class", "county-borders")
