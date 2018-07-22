@@ -49,13 +49,12 @@
 		    
 		
 		var projection = d3.geoAlbers()	
-		    .center([41.7656821, -72.7151064])
-    		.rotate([0, 0])
-    		.parallels([50, 60])
-    		.scale(6000)
+		    .center([-72.7151064,41.7656821])
+    		.scale(4500)
     		.translate([width / 2, height / 2]);
     		
-    	var path = d3.geoPath();
+    	var path = d3.geoPath()
+    		.projection(projection);
 		
 		d3.json("https://raw.githubusercontent.com/geary/polygonzo/master/shapes/json/ct-counties.json", function(error, ct) {
 		  if (error) throw error;
@@ -69,7 +68,8 @@
 
 		  svg1.append("path")
 			  .attr("class", "county-borders")
-			  .attr("d", path(ct)));
+			  .datum(topojson.mesh(ct, ct.arcs, ))
+			  .attr("d", path));
 		});
 
 	    d3.csv("https://tspeng.github.io/Final-Project/data/Accidental_Drug_Related_Deaths_2012-2017.csv", function(data) {
