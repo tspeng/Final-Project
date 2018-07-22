@@ -71,7 +71,7 @@
     		.translate([width / 2, height / 2]);
     		
     	var path = d3.geoPath();
-		
+		/*
 		d3.json("https://raw.githubusercontent.com/geary/polygonzo/master/shapes/json/ct-counties.json", function(error, ct) {
 		  if (error) throw error;
 
@@ -81,10 +81,25 @@
 			.data(ct.features)
 			.enter().append("path")
 			  .attr("d", path)
-		  /*
+		  
 		  svg1.append("path")
 			  .attr("class", "county-borders")
 			  .attr("d", path(topojson.mesh(ct, ct.features, function(a, b) { return a !== b; }) ));*/
+		
+		d3.json("https://d3js.org/us-10m.v1.json", function(error, us) {
+		  if (error) throw error;
+		  svg.append("g")
+			  .attr("class", "counties")
+			.selectAll("path")
+			.data(topojson.feature(us, us.objects.counties).features)
+			.enter().append("path")
+			  .attr("d", path);
+			  
+		  svg.append("path")
+			  .attr("class", "county-borders")
+			  .attr("d", path(topojson.mesh(us, us.objects.counties, function(a, b) { return a !== b; })));
+      
+      
 		});
 
 	    d3.csv("https://tspeng.github.io/Final-Project/data/Accidental_Drug_Related_Deaths_2012-2017.csv", function(data) {
