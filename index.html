@@ -54,7 +54,7 @@
 
 		  svg1.append("g")
 			  .attr("class", "counties")
-			  .attr("transform", "translate(41.7656821,-72.7151064)scale(3)");
+			  .attr("transform", "translate(41.7656821,-72.7151064)scale(3)")
 			.selectAll("path")
 			.data(topojson.feature(us, us.objects.counties).features)
 			.enter().append("path")
