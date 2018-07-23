@@ -77,14 +77,14 @@
 		d3.json("https://d3js.org/us-10m.v1.json", function(error, us) {
 		  if (error) throw error;
 
-		  svg1.append("g")
+		  g1.append("g")
 			  .attr("class", "counties")
 			.selectAll("path")
 			.data(topojson.feature(us, us.objects.counties).features)
 			.enter().append("path")
 			  .attr("d", path);
 
-		  svg1.append("path")
+		  g1.append("path")
 			  .attr("class", "county-borders")
 			  .attr("d", path(topojson.mesh(us, us.objects.counties, function(a, b) { return a !== b; })));
 		});
@@ -205,8 +205,6 @@
 			  	.text(function(d) { return d; });
   
   
-  
-      
 			keys=["Male","Female"];
 			racesexCount.sort(function(a,b) {return a.total-b.total;})
 			x.domain(racesexCount.map(function(d) { return d.Race; }));
