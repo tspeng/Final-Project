@@ -99,13 +99,11 @@
 		var y = (p1[1] + p2[1])/2;
 		
 		var scale = 0.9 / Math.max( dx/width , dy/height );
+		
 	
 		g1.transition()
 		   .duration(1000)
-		   .attr("transform", "translate(" + x + "," + y + ")scale(" + scale + ")")
-		   .on("end", function(){zoomer.call(zoom.transform, d3.zoomIdentity.translate(x,y).scale(scale))});			  
-			  
-			  
+		   .attr("transform", "translate(" + x + "," + y + ")scale(" + scale + ")")			   
 		});
 
 	    d3.csv("https://tspeng.github.io/Final-Project/data/Accidental_Drug_Related_Deaths_2012-2017.csv", function(data) {
