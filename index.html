@@ -91,7 +91,7 @@
 		g1.transition()
 		   .duration(1000)
 		   .attr("transform", "translate(" + 500 + "," + 250 + ")scale(" + 2 + ")")
-		   .on("end", function(){ zoomer.call(zoom.transform, d3.zoomIdentity.translate(500,250).scale(2))});			  
+		   .on("clicked", function(){ zoomer.call(zoom.transform, d3.zoomIdentity.translate(500,250).scale(2))});			  
 			  
 			  
 		});
