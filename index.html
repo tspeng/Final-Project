@@ -68,8 +68,12 @@
 		    
 		
 		var projection = d3.geoAlbers()
-				.scale(150)
-				.parallels([20,50]);
+			.rotate([96, 0])
+			.center([-.6, 38.7])
+			.parallels([29.5, 45.5])
+			.scale(1070)
+			.translate([width / 2, height / 2])
+			.precision(.1);
 		
     	var path = d3.geoPath()
     		.projection(projection);
