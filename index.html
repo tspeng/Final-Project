@@ -67,7 +67,7 @@
 		    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 		    
 		
-		var projection = d3.geoAlbersUsa();
+		var projection = d3.geoAlbers();
 		
     	var path = d3.geoPath()
     		.projection(projection);
@@ -103,7 +103,7 @@
 		g1.transition()
 		   .duration(1000)
 		   .attr("transform", "translate(" + x + "," + y + ")scale(" + scale + ")")
-		   .on("end", function(){ zoomer.call(zoom.transform, d3.zoomIdentity.translate(x,y).scale(scale))});			  
+		   .on("end", function(){zoomer.call(zoom.transform, d3.zoomIdentity.translate(x,y).scale(scale))});			  
 			  
 			  
 		});
