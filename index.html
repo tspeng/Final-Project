@@ -97,13 +97,18 @@
 		
 		var x = (p1[0] + p2[0])/2;
 		var y = (p1[1] + p2[1])/2;
-		
 		var scale = 0.9 / Math.max( dx/width , dy/height );
+		
+        console.log(x);
+        console.log(y);
+        console.log(scale);
+		
+		
 		
 	
 		g1.transition()
 		   .duration(1000)
-		   .attr("transform", "translate(" + (-x) + "," + (-y) + ")scale(" + scale + ")")			   
+		   .attr("transform", "translate(" + x + "," + y + ")scale(" + scale + ")")			   
 		});
 
 	    d3.csv("https://tspeng.github.io/Final-Project/data/Accidental_Drug_Related_Deaths_2012-2017.csv", function(data) {
