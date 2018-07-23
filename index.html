@@ -1,7 +1,6 @@
 <!DOCTYPE html>
-<html lang="en">
+<meta charset="utf-8">
 <style>
-
 .outline {
   fill: none;
   stroke: #000;
@@ -28,279 +27,74 @@ path {
   fill:orange;
 }
 
-}
-
 </style>
-
-<head>
-    <script src="https://d3js.org/d3.v4.min.js"></script>
-    <script src="https://d3js.org/topojson.v1.min.js"></script>
-</head>
 <body>
-	<h1> Final project: Interactive slideshow </h1>
-	<p>scenes, annotations, parameters, and triggers </p>
-	<svg id="scene1" width="960" height="500"></svg>
-	<svg id="scene2" width="960" height="500"></svg>
-	<svg id="scene3" width="960" height="500"></svg>
-	<script>	
-		var svg1 = d3.select("#scene1"),
-		    margin = {top: 50, right: 50, bottom: 50, left: 50},
-		    width = svg1.attr("width") - margin.left - margin.right,
-		    height = svg1.attr("height") - margin.top - margin.bottom;
-		    
-		var svg2 = d3.select("#scene2"),
-		    margin = {top: 50, right: 50, bottom: 50, left: 50},
-		    width = svg2.attr("width") - margin.left - margin.right,
-		    height = svg2.attr("height") - margin.top - margin.bottom;
-		    
-		var svg3 = d3.select("#scene3"),
-		    margin = {top: 50, right: 50, bottom: 50, left: 50},
-		    width = svg3.attr("width") - margin.left - margin.right,
-		    height = svg3.attr("height") - margin.top - margin.bottom;
-		
-		var parseDate = d3.timeParse("%m/%d/%Y");  //Convert string to Date object
-		var formatTime = d3.timeFormat("%Y");      //Extract the year from Date object
-		
-		var x = d3.scaleBand()
-			.rangeRound([0, width])
-			.paddingInner(0.05)
-			.align(0.1);
-				
-		var y = d3.scaleLinear().range([height, 0]);
-		
-		var z = d3.scaleOrdinal(d3.schemeCategory10)
-			.range(["#98abc5", "#8a89a6", "#7b6888", "#6b486b", "#a05d56", "#d0743c", "#ff8c00"]);
-		
-		var g1 = svg1.append("g")
-		    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-		
-		var g2 = svg2.append("g")
-		    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-		var g3 = svg3.append("g")
-		    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-		    
-		
-		var projection = d3.geoAlbers();
-		
-    	var path = d3.geoPath()
-    		.projection(projection);
-    		
-		d3.json("https://d3js.org/us-10m.v1.json", function(error, us) {
-		  if (error) throw error;
-		  
-		  var states = topojson.feature(us, us.objects.states),
-      	  	state = states.features.filter(function(d) { return d.id === 06; })[0];
-      	  
-      	 projection.scale(1)
-        	.translate([0, 0]);
+<script src="//d3js.org/d3.v3.min.js"></script>
+<script src="//d3js.org/topojson.v1.min.js"></script>
+<script>
+
+var width = 960,
+    height = 500;
+
+var projection = d3.geo.albers();
+
+/*
+var projection = d3.geo.transverseMercator()
+          .rotate([120 + 30 / 60, -38 - 50 / 60])
+
+*/
+
+var path = d3.geo.path()
+    .projection(projection);
+
+var svg = d3.select("body").append("svg")
+    .attr("width", width)
+    .attr("height", height);
+d3.json("us.json", function(error, us) {
+  if (error) throw error;
+
+  var states = topojson.feature(us, us.objects.states),
+      state = states.features.filter(function(d) { return d.id === 06; })[0];
+
+  projection.scale(1)
+    .translate([0, 0]);
  
-  		var b = path.bounds(state),
-    		s = .95 / Math.max((b[1][0] - b[0][0]) / width, (b[1][1] - b[0][1]) / height),
-    		t = [(width - s * (b[1][0] + b[0][0])) / 2, (height - s * (b[1][1] + b[0][1])) / 2];
+  var b = path.bounds(state),
+    s = .95 / Math.max((b[1][0] - b[0][0]) / width, (b[1][1] - b[0][1]) / height),
+    t = [(width - s * (b[1][0] + b[0][0])) / 2, (height - s * (b[1][1] + b[0][1])) / 2];
  
-  		projection.scale(s)
-    		.translate(t);
-		 
-		svg1.append("path")
-			  .datum(topojson.mesh(us, us.objects.states, function(a, b) { return a !== b; }))
-			  .attr("class", "mesh")
-			  .attr("d", path)
-		
-		svg1.append("path")
-      		.datum(state)
-      		.attr("class", "outline")
-      		.attr("d", path)
-      		.attr('id', 'land');  
+  projection.scale(s)
+    .translate(t);
+ 
 
-	  svg1.append("clipPath")
-		  .attr("id", "clip-land")
-		  .append("use")
-		  .attr("xlink:href", "#land");
 
-	  svg1.selectAll("path")
-		  .data(topojson.feature(us, us.objects.counties).features)
-		  .enter().append("path")
-		  .attr("d", path)
-		  .attr('county-id', function(d){
-			 return d.id
-		  }).attr("clip-path", "url(#clip-land)")
-		  .attr('class', 'county');
-		  
-		});
+  svg.append("path")
+      .datum(topojson.mesh(us, us.objects.states, function(a, b) { return a !== b; }))
+      .attr("class", "mesh")
+      .attr("d", path);
 
-	    d3.csv("https://tspeng.github.io/Final-Project/data/Accidental_Drug_Related_Deaths_2012-2017.csv", function(data) {
+  svg.append("path")
+      .datum(state)
+      .attr("class", "outline")
+      .attr("d", path)
+      .attr('id', 'land');
 
-		    data.forEach(function(d){
-			    d.Date = parseDate(d.Date);
-			    if (d.Age>=20 && d.Age<30){
-			    	d.AgeGroup="20s"
-			    }else if (d.Age>=30 && d.Age<40) {
-			    	d.AgeGroup="30s"
-			    }else if (d.Age>=40 && d.Age<50) {
-			    	d.AgeGroup="40s"
-			    }else if (d.Age>=50 && d.Age<60) {
-			    	d.AgeGroup="50s"
-			    }else if (d.Age>=60 && d.Age<70) {
-			    	d.AgeGroup="60s"
-			    }else {
-			    	d.AgeGroup="Others"
-			    }
-		    });
-		    
-		    //Exclude the data without residence County
-		    var filtered = data.filter(function(d) { return (d["Residence County"].length!=0 && d.Race.length!=0 && d.Sex.length!=0);});
-		   
-		    var yearageCount0 = d3.nest()
-			  	.key(function(d)    { return formatTime(d.Date); })
-			  	.rollup(function(d) { 
-			  		var d2={Date:formatTime(d[0].Date),"20s":0,"30s":0,"40s":0,"50s":0,"60s":0,"Others":0}
-			  		d.forEach(function(d){
-			  			d2[d.AgeGroup]=d2[d.AgeGroup]+1;
-			  		})
-			  		d2.total=d.length;
-			  		return d2; 
-			  	})
-			  	.entries(filtered);
-			
-			yearageCount=[]
-			for (var i=0;i<yearageCount0.length;i++){
-				yearageCount.push(yearageCount0[i].value)
-			}
-			console.log(yearageCount);
-						
-			var racesexCount0 = d3.nest()
-			  	.key(function(d)   { return d.Race; })
-			  	.rollup(function(d){
-			  		var d2={"Race":d[0].Race,"Male":0,"Female":0}
-			  		d.forEach(function(d){
-			  			d2[d.Sex]=d2[d.Sex]+1;
-			  		})
-			  		d2.total=d.length;
-			  		return d2; 
-			  	})
-			  	.entries(filtered);
-			  	
-			racesexCount=[]
-			for (var i=0;i<racesexCount0.length;i++){
-				racesexCount.push(racesexCount0[i].value)
-			}
-			console.log(racesexCount);
-			
-			//Reference: https://bl.ocks.org/mbostock/3886208
-			
-			keys=["20s","30s","40s","50s","60s","Others"];
-			yearageCount.sort(function(a,b) {return a.total-b.total;})
-			x.domain(yearageCount.map(function(d) { return d.Date; }));
-  			y.domain([0, d3.max(yearageCount, function(d) { return d.total; })]).nice();
-  			z.domain(keys);
-			
-			console.log(d3.stack().keys(keys)(yearageCount));
-			
-			
-			 g2.append("g")
-				.selectAll("g")
-				.data(d3.stack().keys(keys)(yearageCount))
-				.enter().append("g")
-				  .attr("fill", function(d) { return z(d.key); })
-				.selectAll("rect")
-				.data(function(d) { return d; })
-				.enter().append("rect")
-				  .attr("x", function(d) { return x(d.data.Date); })
-				  .attr("y", function(d) { return y(d[1]); })
-				  .attr("height", function(d) { return y(d[0]) - y(d[1]); })
-				  .attr("width", x.bandwidth());
-			g2.append("g")
-				  .attr("class", "axis")
-				  .attr("transform", "translate(0," + height + ")")
-				  .call(d3.axisBottom(x));
-		  	g2.append("g")
-			  	.attr("class", "axis")
-			  	.call(d3.axisLeft(y).ticks(null, "s"))
-				.append("text")
-			  	.attr("x", 2)
-			  	.attr("y", y(y.ticks().pop()) + 0.5)
-			  	.attr("dy", "0.32em")
-			  	.attr("fill", "#000")
-			  	.attr("font-weight", "bold")
-			  	.attr("text-anchor", "start")
-			  	.text("Population");
-		  	var legend = g2.append("g")
-			  	.attr("font-family", "sans-serif")
-			  	.attr("font-size", 10)
-			  	.attr("text-anchor", "end")
-			.selectAll("g")
-			.data(keys.slice().reverse())
-			.enter().append("g")
-			  	.attr("transform", function(d, i) { return "translate(0," + i * 20 + ")"; });
-		  	legend.append("rect")
-			  	.attr("x", width - 19)
-			 	 .attr("width", 19)
-			  	.attr("height", 19)
-			  	.attr("fill", z);
-		  	legend.append("text")
-			  	.attr("x", width - 24)
-			  	.attr("y", 9.5)
-			  	.attr("dy", "0.32em")
-			  	.text(function(d) { return d; });
-  
-  
-  
+   svg.append("clipPath")
+      .attr("id", "clip-land")
+      .append("use")
+      .attr("xlink:href", "#land");
+
+  svg.selectAll("path")
+      .data(topojson.feature(us, us.objects.counties).features)
+      .enter().append("path")
+      .attr("d", path)
+      .attr('county-id', function(d){
+         return d.id
+      }).attr("clip-path", "url(#clip-land)")
+      .attr('class', 'county');
       
-			keys=["Male","Female"];
-			racesexCount.sort(function(a,b) {return a.total-b.total;})
-			x.domain(racesexCount.map(function(d) { return d.Race; }));
-  			y.domain([0, d3.max(racesexCount, function(d) { return d.total; })]).nice();
-  			z.domain(keys);
-			
-			console.log(d3.stack().keys(keys)(racesexCount));
 
-			 g3.append("g")
-				.selectAll("g")
-				.data(d3.stack().keys(keys)(racesexCount))
-				.enter().append("g")
-				  .attr("fill", function(d) { return z(d.key); })
-				.selectAll("rect")
-				.data(function(d) { return d; })
-				.enter().append("rect")
-				  .attr("x", function(d) { return x(d.data.Race); })
-				  .attr("y", function(d) { return y(d[1]); })
-				  .attr("height", function(d) { return y(d[0]) - y(d[1]); })
-				  .attr("width", x.bandwidth());
-			g3.append("g")
-				  .attr("class", "axis")
-				  .attr("transform", "translate(0," + height + ")")
-				  .call(d3.axisBottom(x));
-		  	g3.append("g")
-			  	.attr("class", "axis")
-			  	.call(d3.axisLeft(y).ticks(null, "s"))
-				.append("text")
-			  	.attr("x", 2)
-			  	.attr("y", y(y.ticks().pop()) + 0.5)
-			  	.attr("dy", "0.32em")
-			  	.attr("fill", "#000")
-			  	.attr("font-weight", "bold")
-			  	.attr("text-anchor", "start")
-			  	.text("Population");
-		  	var legend = g3.append("g")
-			  	.attr("font-family", "sans-serif")
-			  	.attr("font-size", 10)
-			  	.attr("text-anchor", "end")
-			.selectAll("g")
-			.data(keys.slice().reverse())
-			.enter().append("g")
-			  	.attr("transform", function(d, i) { return "translate(0," + i * 20 + ")"; });
-		  	legend.append("rect")
-			  	.attr("x", width - 19)
-			 	 .attr("width", 19)
-			  	.attr("height", 19)
-			  	.attr("fill", z);
-		  	legend.append("text")
-			  	.attr("x", width - 24)
-			  	.attr("y", 9.5)
-			  	.attr("dy", "0.32em")
-			  	.text(function(d) { return d; });
-		});
+});
 
-	</script>
-</body>
-</html>
+
+</script>
