@@ -67,9 +67,9 @@
 		    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 		    
 		
-		var projection = d3.geoAlbersUsa()
-				.center([-101.1543707,40.809692])
-				.scale(150);
+		var projection = d3.geoAlbers()
+				.scale(150)
+				.parallels([20,50]);
 		
     	var path = d3.geoPath()
     		.projection(projection);
