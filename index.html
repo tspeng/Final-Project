@@ -87,6 +87,13 @@
 		  g1.append("path")
 			  .attr("class", "county-borders")
 			  .attr("d", path(topojson.mesh(us, us.objects.counties, function(a, b) { return a !== b; })));
+			  
+		g1.transition()
+		   .duration(1000)
+		   .attr("transform", "translate(" + 500 + "," + 250 + ")scale(" + 2 + ")")
+		   .on("end", function(){ zoomer.call(zoom.transform, d3.zoomIdentity.translate(500,250).scale(2))});			  
+			  
+			  
 		});
 
 	    d3.csv("https://tspeng.github.io/Final-Project/data/Accidental_Drug_Related_Deaths_2012-2017.csv", function(data) {
