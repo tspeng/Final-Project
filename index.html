@@ -88,27 +88,9 @@
 			  .attr("class", "county-borders")
 			  .attr("d", path(topojson.mesh(us, us.objects.counties, function(a, b) { return a !== b; })));
 		
-		var corners=[[-73.6541797,41.000141],[-71.8044207,42.013709]];
-		var p1 = projection(corners[0]);
-		var p2 = projection(corners[1]);
-
-		var dx = Math.abs(p1[0] - p2[0]);
-		var dy = Math.abs(p1[1] - p2[1]);
-		
-		var x = (p1[0] + p2[0])/2;
-		var y = (p1[1] + p2[1])/2;
-		var scale = 0.9 / Math.max( dx/width , dy/height );
-		
-        console.log(x);
-        console.log(y);
-        console.log(scale);
-		
-		
-		
-	
 		g1.transition()
 		   .duration(1000)
-		   .attr("transform", "translate(" + x + "," + y + ")scale(" + scale + ")")			   
+		   .attr("transform", "translate(" + 400+ "," + 250 + ")scale(" + 5 + ")")			   
 		});
 
 	    d3.csv("https://tspeng.github.io/Final-Project/data/Accidental_Drug_Related_Deaths_2012-2017.csv", function(data) {
