@@ -77,8 +77,7 @@
 
 		*/
 
-		var path = d3.geoPath()
-			.projection(projection);
+		var path = d3.geoPath();
 
 		d3.json("https://tspeng.github.io/Final-Project/data/us.json", function(error, us) {
 		  if (error) throw error;
