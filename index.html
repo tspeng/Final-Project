@@ -60,69 +60,14 @@
 		var z = d3.scaleOrdinal(d3.schemeCategory10)
 			.range(["#98abc5", "#8a89a6", "#7b6888", "#6b486b", "#a05d56", "#d0743c", "#ff8c00"]);
 		
+		var g1 = svg1.append("g")
+		    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+		
 		var g2 = svg2.append("g")
 		    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 		var g3 = svg3.append("g")
 		    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-		
-		
-		var width = 960,
-			height = 500;
 
-		var projection = d3.geoAlbers();
-
-		/*
-		var projection = d3.geo.transverseMercator()
-				  .rotate([120 + 30 / 60, -38 - 50 / 60])
-
-		*/
-
-		var path = d3.geoPath();
-
-		d3.json("https://tspeng.github.io/Final-Project/data/us.json", function(error, us) {
-		  if (error) throw error;
-
-		  var states = topojson.feature(us, us.objects.states),
-			  state = states.features.filter(function(d) { return d.id === 06; })[0];
-
-		  projection.scale(1)
-			.translate([0, 0]);
- 
-		  var b = path.bounds(state),
-			s = .95 / Math.max((b[1][0] - b[0][0]) / width, (b[1][1] - b[0][1]) / height),
-			t = [(width - s * (b[1][0] + b[0][0])) / 2, (height - s * (b[1][1] + b[0][1])) / 2];
- 
-		  projection.scale(s)
-			.translate(t);
- 
-
-
-		  svg1.append("path")
-			  .datum(topojson.mesh(us, us.objects.states, function(a, b) { return a !== b; }))
-			  .attr("class", "mesh")
-			  .attr("d", path);
-
-		  svg1.append("path")
-			  .datum(state)
-			  .attr("class", "outline")
-			  .attr("d", path)
-			  .attr('id', 'land');
-
-		   svg1.append("clipPath")
-			  .attr("id", "clip-land")
-			  .append("use")
-			  .attr("xlink:href", "#land");
-
-		  svg1.selectAll("path")
-			  .data(topojson.feature(us, us.objects.counties).features)
-			  .enter().append("path")
-			  .attr("d", path)
-			  .attr('county-id', function(d){
-				 return d.id
-			  }).attr("clip-path", "url(#clip-land)")
-			  .attr('class', 'county');
-		
-		});
 
 	    d3.csv("https://tspeng.github.io/Final-Project/data/Accidental_Drug_Related_Deaths_2012-2017.csv", function(data) {
 
