@@ -60,9 +60,6 @@
 		var z = d3.scaleOrdinal(d3.schemeCategory10)
 			.range(["#98abc5", "#8a89a6", "#7b6888", "#6b486b", "#a05d56", "#d0743c", "#ff8c00"]);
 		
-		var g1 = svg1.append("g")
-		    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-		
 		var g2 = svg2.append("g")
 		    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 		var g3 = svg3.append("g")
@@ -83,9 +80,6 @@
 		var path = d3.geoPath()
 			.projection(projection);
 
-		var svg1 = d3.select("body").append("svg")
-			.attr("width", width)
-			.attr("height", height);
 		d3.json("https://tspeng.github.io/Final-Project/data/us.json", function(error, us) {
 		  if (error) throw error;
 
