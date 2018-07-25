@@ -30,6 +30,8 @@
 	<svg id="scene2" width="960" height="500"></svg>
 	<svg id="scene3" width="960" height="500"></svg>
 	<script>	
+		//https://bl.ocks.org/mbostock/3886208
+		//http://learnjsdata.com/group_data.html
 		var svg1 = d3.select("#scene1"),
 		    margin = {top: 50, right: 50, bottom: 50, left: 50},
 		    width = svg1.attr("width") - margin.left - margin.right,
@@ -66,37 +68,9 @@
 		var g3 = svg3.append("g")
 		    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 		    
-		
-		var projection = d3.geoAlbers()
-			.rotate([96, 0])
-			.center([-.6, 38.7])
-			.parallels([29.5, 45.5])
-			.scale(1070)
-			.translate([width / 2, height / 2])
-			.precision(.1);
-		
-    	var path = d3.geoPath();
-
-		d3.json("https://d3js.org/us-10m.v1.json", function(error, us) {
-		  if (error) throw error;
-
-		  g1.append("g")
-			  .attr("class", "counties")
-			.selectAll("path")
-			.data(topojson.feature(us, us.objects.counties).features)
-			.enter().append("path")
-			  .attr("d", path);
-
-		  g1.append("path")
-			  .attr("class", "county-borders")
-			  .attr("d", path(topojson.mesh(us, us.objects.counties, function(a, b) { return a !== b; })));
-		
-		g1.transition()
-		   .duration(1000)
-		   .attr("transform", "translate(-8200, -1600)scale(" + 10 + ")");	 //scale is applied on the original location and size, translate is applied afterwards		   
-		});
 
 	    d3.csv("https://tspeng.github.io/Final-Project/data/Accidental_Drug_Related_Deaths_2012-2017.csv", function(data) {
+	
 
 		    data.forEach(function(d){
 			    d.Date = parseDate(d.Date);
@@ -117,6 +91,16 @@
 		    
 		    //Exclude the data without residence County
 		    var filtered = data.filter(function(d) { return (d["Residence County"].length!=0 && d.Race.length!=0 && d.Sex.length!=0);});
+		    
+		   	var countyCount=d3.nest()
+				.key(function(d){ return d["Death County"]; })
+				.rollup(function(d){
+					return d.length;
+				})
+				.entries (filtered);
+		   
+			console.log(countyCount);
+		   
 		   
 		    var yearageCount0 = d3.nest()
 			  	.key(function(d)    { return formatTime(d.Date); })
@@ -135,7 +119,7 @@
 				yearageCount.push(yearageCount0[i].value)
 			}
 			console.log(yearageCount);
-						
+	
 			var racesexCount0 = d3.nest()
 			  	.key(function(d)   { return d.Race; })
 			  	.rollup(function(d){
