@@ -238,8 +238,12 @@
 				  .attr("width", x.bandwidth());
 			g3.append("g")
 				  .attr("class", "axis")
-				  .attr("transform", "translate(0," + height + ")")
+				  .attr("transform","translate(" + (width/2) + " ," + (height + margin.top + 20) + ")")
+				  .style("text-anchor", "middle")
+				  .text("Race");
 				  .call(d3.axisBottom(x));
+				  
+				  
 		  	g3.append("g")
 			  	.attr("class", "axis")
 			  	.call(d3.axisLeft(y).ticks(null, "s"))
