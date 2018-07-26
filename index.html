@@ -90,6 +90,9 @@
 			    }
 		    });
 		    
+		    console.log(data)
+		    
+		    
 		    //Exclude the data without residence County
 		    var filtered = data.filter(function(d) { return (d["Residence County"].length!=0 && d.Race.length!=0 && d.Sex.length!=0 && d["Death County"].length!=0 && d["Death County"]!="USA");});
 		    
@@ -162,13 +165,14 @@
 			//Reference: https://bl.ocks.org/mbostock/3886208
 			
 			keys=["20s","30s","40s","50s","60s","Others"];
-			yearageCount.sort(function(a,b) {return a.total-b.total;})
+			yearageCount.sort(function(a,b) {return a.Date-b.Date;})
 			x.domain(yearageCount.map(function(d) { return d.Date; }));
   			y.domain([0, d3.max(yearageCount, function(d) { return d.total; })]).nice();
   			z.domain(keys);
 			
 			console.log(d3.stack().keys(keys)(yearageCount));
 			
+			yearageCount.
 			
 			 g2.append("g")
 				.selectAll("g")
