@@ -47,6 +47,8 @@
 		    width = svg3.attr("width") - margin.left - margin.right,
 		    height = svg3.attr("height") - margin.top - margin.bottom;
 		
+		color=d3.scale.category10()
+		
 		var parseDate = d3.timeParse("%m/%d/%Y");  //Convert string to Date object
 		var formatTime = d3.timeFormat("%Y");      //Extract the year from Date object
 		
@@ -68,7 +70,7 @@
 		    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 		
 		
-		var disk =d3.layout.pack()
+		var disk =d3.pack()
 			.sort(null)
 			.size([height,height])
 			.padding(1.5);
