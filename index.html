@@ -105,7 +105,9 @@
 		   
 			console.log(countyCount);
 			
-			var nodes=disk.nodes({children:countyCount}).filter( function(d){return !d.children; });
+			var root = d3.hierarchy(classes(countyCount))
+      			.sum(function(d) { return d.value; })
+      			.sort(function(a, b) { return b.value - a.value; });
 			
 			var disks = g1.append(g)
 				.attr("transform", "translate(0,0)")
