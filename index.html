@@ -47,8 +47,8 @@
 		    width = svg3.attr("width") - margin.left - margin.right,
 		    height = svg3.attr("height") - margin.top - margin.bottom;
 		
-		var parseDate = d3.timeParse("%m/%d/%Y");  //Convert string to Date object
-		var formatTime = d3.timeFormat("%Y");      //Extract the year from Date object
+		var parseDate = d3.timeParse("%m/%d/%y");  //Convert string to Date object
+		var formatTime = d3.timeFormat("%y");      //Extract the year from Date object
 		
 		var x = d3.scaleBand()
 			.rangeRound([0, width])
