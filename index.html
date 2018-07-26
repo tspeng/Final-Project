@@ -109,7 +109,7 @@
 				.data(bubble(root).leaves())
 				.enter().append("g")
 				  .attr("class", "node")
-				  .attr("transform", function(d) { return "translate(" + 2*d.x + "," + d.y + ")"; });
+				  .attr("transform", function(d) { return "translate(" + 3*d.x + "," + d.y + ")"; });
 				  
 		  	node.append("circle")
 		  		.attr("id", function(d) { return d.id; })
