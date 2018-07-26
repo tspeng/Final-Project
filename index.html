@@ -60,11 +60,11 @@
 		var z = d3.scaleOrdinal(d3.schemeCategory10);
 		
 		var g1 = svg1.append("g")
-		    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+		    .attr("transform", "translate(" + 2*margin.left + "," + margin.top + ")");
 		var g2 = svg2.append("g")
-		    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+		    .attr("transform", "translate(" + 2*margin.left + "," + margin.top + ")");
 		var g3 = svg3.append("g")
-		    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+		    .attr("transform", "translate(" + 2*margin.left + "," + margin.top + ")");
 		
 		var bubble =d3.pack()
 			.size([height,height])
