@@ -92,7 +92,7 @@
 		    console.log(data);
 		    
 		    //Exclude the data without residence County
-		    var filtered = data.filter(function(d) {return (d.Date >=2012 && d["Death County"]!="USA");});
+		    var filtered = data.filter(function(d) {return (d.Sex !=0 && d.Date >=2012 && d["Death County"]!="USA");});
 		    
 		   	var countyCount=d3.nest()
 				.key(function(d){ return d["Death County"]; })
@@ -143,7 +143,7 @@
 			var racesexCount0 = d3.nest()
 			  	.key(function(d)   { return d.Race; })
 			  	.rollup(function(d){
-			  		var d2={"Race":d[0].Race,"Male":0,"Female":0,"":0}
+			  		var d2={"Race":d[0].Race,"Male":0,"Female":0}
 			  		d.forEach(function(d){
 			  			d2[d.Sex]=d2[d.Sex]+1;
 			  		})
