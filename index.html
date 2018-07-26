@@ -70,7 +70,7 @@
 		    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 		
 		
-		var disk =d3.pack()
+		var bubble =d3.pack()
 			.size([height,height])
 			.padding(1.5);
 			
@@ -105,45 +105,24 @@
 		   
 			console.log(countyCount);
 			
-			var root = d3.hierarchy(classes(countyCount))
-      			.sum(function(d) { return d.value; })
-      			.sort(function(a, b) { return b.value - a.value; });
+			var root = d3.hierarchy({children: countyCount})
+				.sum(function(d){return d.value; })
 			
-			var disks = g1.append(g)
-				.attr("transform", "translate(0,0)")
-				.data(root.children)
-				.enter();
-			
-			
-			//create the bubbles	
-			disks.append("circle")
-				.attr("r", function(d){ return d.r; })
-        		.attr("cx", function(d){ return d.x; })
-        		.attr("cy", function(d){ return d.y; })
-        		.style("fill", function(d) { return color(d.value); });
-				
-			//format the text for each bubble
-			disks.append("text")
-				.attr("x", function(d){ return d.x; })
-				.attr("y", function(d){ return d.y; })
-				.attr("text-anchor", "middle")
-				.text(function(d){ return d.key; })
-				.style({
-					"fill":"white", 
-					"font-family":"Helvetica Neue, Helvetica, Arial, san-serif",
-					"font-size": "12px"
-        });
-			
-			
-			
-			
-			
-			
-			
-			
-			
-		   
-		   
+			var node = svg1.selectAll(".node")
+				.data(bubble(root).leaves())
+				.enter().append("g")
+				  .attr("class", "node")
+				  .attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
+				  
+		  	node.append("circle")
+		  		.attr("id", function(d) { return d.id; })
+			  	.attr("r", function(d) { return d.r; })
+			  	.style("fill", function(d) { return color(d.data.key); })
+
+			node.append("text")
+				.text(function(d) { return d.data.key;})
+
+	
 		    var yearageCount0 = d3.nest()
 			  	.key(function(d)    { return formatTime(d.Date); })
 			  	.rollup(function(d) { 
