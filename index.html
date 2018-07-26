@@ -90,6 +90,8 @@
 			    }
 		    });
 		    
+		    console.log(data);
+		    
 		    //Exclude the data without residence County
 		    var filtered = data.filter(function(d) { return (d["Residence County"].length!=0 && d.Race.length!=0 && d.Sex.length!=0 && d["Death County"].length!=0 && d["Death County"]!="USA");});
 		    
