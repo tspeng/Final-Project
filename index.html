@@ -161,7 +161,7 @@
 			//Reference: https://bl.ocks.org/mbostock/3886208
 			
 			keys=["20s","30s","40s","50s","60s","Others"];
-			yearageCount.sort(function(a,b) {return a.total-b.total;})
+			yearageCount.sort(function(a,b) {return a.Date-b.Date;})
 			x.domain(yearageCount.map(function(d) { return d.Date; }));
   			y.domain([0, d3.max(yearageCount, function(d) { return d.total; })]).nice();
   			z.domain(keys);
