@@ -241,6 +241,11 @@
 				  .attr("transform", "translate(0," + height + ")")
 				  .call(d3.axisBottom(x));
 				  
+			g3.append("text")             
+				  .attr("x", 480 )
+				  .attr("y",  475 )
+				  .style("text-anchor", "middle")
+				  .text("Race");	  
 				  
 		  	g3.append("g")
 			  	.attr("class", "axis")
