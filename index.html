@@ -92,7 +92,7 @@
 		    console.log(data);
 		    
 		    //Exclude the data without residence County
-		    var filtered = data.filter(function(d) {return (d["Death County"].length!=0 && d["Death County"]!="USA");});
+		    var filtered = data.filter(function(d) {return (d["Death County"]!="USA");});
 		    
 		   	var countyCount=d3.nest()
 				.key(function(d){ return d["Death County"]; })
