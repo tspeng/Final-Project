@@ -236,6 +236,7 @@
 				  .attr("y", function(d) { return y(d[1]); })
 				  .attr("height", function(d) { return y(d[0]) - y(d[1]); })
 				  .attr("width", x.bandwidth());
+				  
 			g3.append("g")
 				  .attr("class", "axis")
 				  .attr("transform", "translate(0," + height + ")")
@@ -243,7 +244,7 @@
 				  
 			g3.append("text")             
 				  .attr("x", 480 )
-				  .attr("y",  475 )
+				  .attr("y",  -100 )
 				  .style("text-anchor", "middle")
 				  .text("Race");	  
 				  
