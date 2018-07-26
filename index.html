@@ -238,19 +238,14 @@
 				  .attr("width", x.bandwidth());
 			g3.append("g")
 				  .attr("class", "axis")
-				  .call(d3.axisBottom(x))
-				  .append("text")
-				  .attr("transform","translate(" + (width/2) + " ," + (height + margin.top + 20) + ")")
-				  .style("text-anchor", "middle")
-				  .text("Race")
-				  
-				  
+				  .attr("transform", "translate(0," + height + ")")
+				  .call(d3.axisBottom(x));
 		  	g3.append("g")
 			  	.attr("class", "axis")
 			  	.call(d3.axisLeft(y).ticks(null, "s"))
 				.append("text")
 			  	.attr("y", 0 - margin.left)
-      			.attr("x",0 - (height / 2))
+                .attr("x",0 - (height / 2))
 			  	.attr("dy", "0.32em")
 			  	.attr("fill", "#000")
 			  	.attr("font-weight", "bold")
