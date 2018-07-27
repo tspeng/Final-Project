@@ -204,9 +204,6 @@
   			z.domain(keys);
   			
   			stack.keys(keys);
-
-  			stack.order(d3.stackOrderNone);
-  			stack.offset(d3.stackOffsetNone);
 			
 			svg2.selectAll("g")
 				.data(stack(yearageCount))
