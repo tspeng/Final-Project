@@ -220,7 +220,7 @@ body {
 			
 			browser.append('text')
 			  .datum(function(d) { return d; })
-			  .attr('transform', function(d) { return 'translate(' + x(data[4].Date) + ',' + y(d[4][1]) + ')'; })
+			  .attr('transform', function(d) { return 'translate(' + x(d[5].Date) + ',' + y(d[5][1]) + ')'; })
 			  .attr('x', -6) 
 			  .attr('dy', '.35em')
 			  .style("text-anchor", "start")
