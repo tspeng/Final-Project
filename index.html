@@ -240,11 +240,6 @@ body {
 			
 			
 			//g2 x-axis
-			g2.append("g")
-				  .attr("class", "axis")
-				  .attr("transform", "translate(0," + height + ")")
-				  .call(d3.axisBottom(x));
-				  
 			g2.append("text")             
 				  .attr("x", width/2)
 				  .attr("y",  height+margin.bottom*0.75)
@@ -255,8 +250,6 @@ body {
 				  
 			//g2 y-axis
 		  	g2.append("g")
-			  	.attr("class", "axis")
-			  	.call(d3.axisLeft(y).ticks(null, "s"))
 				.append("text")
 				.attr("y", 0 - margin.left)
                 .attr("x",0 - (height / 2))
