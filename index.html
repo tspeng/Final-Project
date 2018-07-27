@@ -209,7 +209,7 @@
   			stack.offset(d3.stackOffsetNone);
 			
 			g2.selectAll("g")
-				.data(d3.stack().keys(keys)(yearageCount))
+				.data(stack(yearageCount))
 				.enter().append("g")
 				.attr('fill-opacity', 0.5);
 			
