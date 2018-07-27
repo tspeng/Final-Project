@@ -211,6 +211,7 @@ body {
 				.data(d3.stack().keys(keys)(yearageCount))
 				.enter().append("g")
 				.attr('class', function(d){ return 'browser ' + d.key; })
+				.attr('fill-opacity', 0.5);
 			
 			browser.append('path')
 				.attr('class','area')
@@ -271,7 +272,8 @@ body {
 			  	.attr("x", 100)
 			 	.attr("width", 19)
 			  	.attr("height", 19)
-			  	.attr("fill", z); 	
+			  	.attr("fill", z)
+			  	.attr('fill-opacity', 0.5); 	
 		  	legend.append("text")
 			  	.attr("x", 100-5)
 			  	.attr("y", 9.5)
