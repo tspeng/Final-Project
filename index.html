@@ -1,21 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
 <style>
-.counties :hover {
-  fill: orange;
+
+
+body {
+  font: 12px sans-serif;
 }
 
-.county-borders {
+.axis path,
+.axis line {
   fill: none;
-  stroke: #fff;
-  stroke-width: 0.5px;
-  stroke-linejoin: round;
-  stroke-linecap: round;
-  pointer-events: none;
+  stroke: none;
+  shape-rendering: crispEdges;
 }
 
-
+.browser text {
+  text-anchor: end;
 }
+
 
 </style>
 
@@ -205,17 +207,18 @@
   			
 			console.log(d3.stack().keys(keys)(yearageCount))
 			
-			svg2.selectAll("g")
+			var browser=svg2.selectAll(".browser")
 				.data(d3.stack().keys(keys)(yearageCount))
 				.enter().append("g")
+				.attr('class', function(d){ return 'browser ' + d.key; })
 				.attr('fill-opacity', 0.5);
 			
-			svg2.append('path')
+			browser.append('path')
 				.attr('class','area')
 				.attr('d',area)
 				.attr("fill", function(d) { return z(d.key); })
 			
-			svg2.append('text')
+			browser.append('text')
 			  .datum(function(d) { return d; })
 			  .attr('transform', function(d) { return 'translate(' + x(data[5].Date) + ',' + y(d[5][1]) + ')'; })
 			  .attr('x', -6) 
