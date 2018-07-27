@@ -53,10 +53,9 @@ body {
 		var formatTime = d3.timeFormat("%Y");      //Extract the year from Date object
 		
 		var x = d3.scaleBand()
-			.rangeRound([0, width]);
-			/*
+			.rangeRound([0, width])
 			.paddingInner(0.05)
-			.align(0.1);*/
+			.align(0.1);
 				
 		var y = d3.scaleLinear().range([height, 0]);
 		
