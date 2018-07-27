@@ -207,7 +207,7 @@ body {
   			
 			console.log(d3.stack().keys(keys)(yearageCount))
 			
-			var browser=svg2.selectAll(".browser")
+			var browser=g2.selectAll(".browser")
 				.data(d3.stack().keys(keys)(yearageCount))
 				.enter().append("g")
 				.attr('class', function(d){ return 'browser ' + d.key; })
