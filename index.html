@@ -240,8 +240,14 @@
 			g3.append("g")
 				  .attr("class", "axis")
 				  .attr("transform", "translate(0," + height + ")")
-				  .call(d3.axisBottom(x))
-			      .append("text")             
+				  .call(d3.axisBottom(x));
+			
+			console.log(width);	  
+			console.log(height);
+			console.log(margin);
+			
+			
+			g3.append("text")             
 				  .attr("x", width/2)
 				  .attr("y",  height+margin.bottom)
 				  .attr("fill", "#000")
