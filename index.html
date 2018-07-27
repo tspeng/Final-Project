@@ -211,7 +211,6 @@ body {
 				.data(d3.stack().keys(keys)(yearageCount))
 				.enter().append("g")
 				.attr('class', function(d){ return 'browser ' + d.key; })
-				.attr('fill-opacity', 0.5);
 			
 			browser.append('path')
 				.attr('class','area')
