@@ -227,16 +227,16 @@ body {
 			  .text(function(d) { return d.key; })
 			  .attr('fill-opacity', 1);
 			
-			svg2.append('g')
+			g2.append('g')
 			  .attr('class', 'x axis')
 			  .attr('transform', 'translate(0,' + height + ')')
 			  .call(xAxis);
 
-		  	svg2.append('g')
+		  	g2.append('g')
 			  .attr('class', 'y axis')
 			  .call(yAxis);
 
-		  	svg2.append ("text")
+		  	g2.append ("text")
 				.attr("x", 0-margin.left)
 				.text("Year")
 			
