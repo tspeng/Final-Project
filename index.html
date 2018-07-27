@@ -143,7 +143,7 @@ div.tooltip {
 
 			var div = d3.select("body").append("div")
 				.attr("class", "tooltip")
-				.style("opacity", 1);
+				.style("opacity", 0);
 
 			svg1.selectAll("dot")
 				 .data(bubble(root).leaves())
@@ -154,7 +154,7 @@ div.tooltip {
 				 .on("mouseover", function(d) {
 				   div.transition()
 					 .duration(200)
-					 .style("opacity", 1);
+					 .style("opacity", 0);
 				   div.html(d.data.key + "<br/>" + d.data.value)
 					 .style("left", (d3.event.pageX) + "px")
 					 .style("top", (d3.event.pageY - 28) + "px");
@@ -162,7 +162,7 @@ div.tooltip {
 				 .on("mouseout", function(d) {
 				   div.transition()
 					 .duration(500)
-					 .style("opacity", 1);
+					 .style("opacity", 0);
 				   });
 
 
