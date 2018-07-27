@@ -159,16 +159,14 @@
 			console.log(racesexCount);
 			
 			//Reference: https://bl.ocks.org/mbostock/3886208
-			
+			//////////////////////////////////////////////////////////////////////////////
+			/*
 			keys=["20s","30s","40s","50s","60s","Others"];
 			yearageCount.sort(function(a,b) {return a.Date-b.Date;})
 			x.domain(yearageCount.map(function(d) { return d.Date; }));
   			y.domain([0, d3.max(yearageCount, function(d) { return d.total; })]).nice();
   			z.domain(keys);
-			
-			console.log(d3.stack().keys(keys)(yearageCount));
-			
-			
+
 			 g2.append("g")
 				.selectAll("g")
 				.data(d3.stack().keys(keys)(yearageCount))
@@ -181,6 +179,67 @@
 				  .attr("y", function(d) { return y(d[1]); })
 				  .attr("height", function(d) { return y(d[0]) - y(d[1]); })
 				  .attr("width", x.bandwidth());
+			*/
+			//////////////////////////////////////////////////////////////////////////////
+			keys=["20s","30s","40s","50s","60s","Others"];
+			
+			
+			var xAxis =d3.axisBottom()
+					.scale(x);
+			
+			var yAxis =d3.axisLeft()
+					.scale(y)
+					
+			var area = d3.area()
+    			.x(function(d) { 
+      				return x(d.data.date); })
+    			.y0(function(d) { return y(d[0]); })
+    			.y1(function(d) { return y(d[1]); })
+			
+			var stack = d3.stack()
+			
+			yearageCount.sort(function(a,b) {return a.Date-b.Date;})
+			x.domain(yearageCount.map(function(d) { return d.Date; }));
+  			y.domain([0, d3.max(yearageCount, function(d) { return d.total; })]).nice();
+  			z.domain(keys);
+  			
+  			stack.keys(keys);
+
+  			stack.order(d3.stackOrderNone);
+  			stack.offset(d3.stackOffsetNone);
+			
+			g2.selectAll("g")
+				.data(d3.stack().keys(keys)(yearageCount))
+				.enter().append("g")
+				.attr('fill-opacity', 0.5);
+			
+			g2.append('path')
+				.attr('class','area')
+				.attr('d',area)
+				.attr("fill", function(d) { return color(d.key); })
+			
+			g2.append('text')
+			  .datum(function(d) { return d; })
+			  .attr('transform', function(d) { return 'translate(' + x(data[5].date) + ',' + y(d[5][1]) + ')'; })
+			  .attr('x', -6) 
+			  .attr('dy', '.35em')
+			  .style("text-anchor", "start")
+			  .text(function(d) { return d.key; })
+			  .attr('fill-opacity', 1);
+			
+			g2.append('g')
+			  .attr('class', 'x axis')
+			  .attr('transform', 'translate(0,' + height + ')')
+			  .call(xAxis);
+
+		  	g2.append('g')
+			  .attr('class', 'y axis')
+			  .call(yAxis);
+
+		  	g2.append ("text")
+				.attr("x", 0-margin.left)
+				.text("Year")
+			
 			
 			//g2 x-axis
 			g2.append("g")
@@ -221,7 +280,7 @@
 			  	.attr("transform", function(d, i) { return "translate(0," + i * 20 + ")"; });
 		  	legend.append("rect")
 			  	.attr("x", 100)
-			 	 .attr("width", 19)
+			 	.attr("width", 19)
 			  	.attr("height", 19)
 			  	.attr("fill", z); 	
 		  	legend.append("text")
