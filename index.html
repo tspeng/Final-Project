@@ -216,7 +216,7 @@
 			g2.append('path')
 				.attr('class','area')
 				.attr('d',area)
-				.attr("fill", function(d) { return color(d.key); })
+				.attr("fill", function(d) { return z(d.key); })
 			
 			g2.append('text')
 			  .datum(function(d) { return d; })
