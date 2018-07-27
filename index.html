@@ -18,6 +18,20 @@ body {
   text-anchor: end;
 }
 
+div.tooltip {
+  position: absolute;
+  text-align: center;
+  width: 60px;
+  height: 28px;
+  padding: 2px;
+  font: 12px sans-serif;
+  background: lightsteelblue;
+  border: 0px;
+  border-radius: 8px;
+  pointer-events: none;
+}
+
+
 
 </style>
 
@@ -123,7 +137,42 @@ body {
       			.style("text-anchor", "middle")
 				.attr("font-size","10px");
 
-	
+
+
+
+
+			var div = d3.select("body").append("div")
+				.attr("class", "tooltip")
+				.style("opacity", 0);
+
+			svg1.selectAll("dot")
+				 .data(filtered)
+			   .enter().append("circle")
+				 .attr("r", 5)
+				 .attr("cx", function(d) { return 2*d.x; })
+				 .attr("cy", function(d) { return d.y; })
+				 .on("mouseover", function(d) {
+				   div.transition()
+					 .duration(200)
+					 .style("opacity", .9);
+				   div.html(d.data.key + "<br/>" + d.data.value)
+					 .style("left", (d3.event.pageX) + "px")
+					 .style("top", (d3.event.pageY - 28) + "px");
+				   })
+				 .on("mouseout", function(d) {
+				   div.transition()
+					 .duration(500)
+					 .style("opacity", 0);
+				   });
+
+
+
+
+
+
+			//////////////////Plot 2////////////////////////////////// 
+			//https://bl.ocks.org/lorenzopub/0b09968e3d4970d845a5f45ed25595bb	
+			
 		    var yearageCount0 = d3.nest()
 			  	.key(function(d)    { return formatTime(d.Date); })
 			  	.rollup(function(d) { 
@@ -160,8 +209,7 @@ body {
 			}
 			console.log(racesexCount);
 			
-			//////////////////Plot 2////////////////////////////////// 
-			//https://bl.ocks.org/lorenzopub/0b09968e3d4970d845a5f45ed25595bb
+
 			keys=["20s","30s","40s","50s","60s","Others"];
 			
 			
