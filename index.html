@@ -208,17 +208,17 @@
   			stack.order(d3.stackOrderNone);
   			stack.offset(d3.stackOffsetNone);
 			
-			g2.selectAll("g")
+			svg2.selectAll("g")
 				.data(stack(yearageCount))
 				.enter().append("g")
 				.attr('fill-opacity', 0.5);
 			
-			g2.append('path')
+			svg2.append('path')
 				.attr('class','area')
 				.attr('d',area)
 				.attr("fill", function(d) { return z(d.key); })
 			
-			g2.append('text')
+			svg2.append('text')
 			  .datum(function(d) { return d; })
 			  .attr('transform', function(d) { return 'translate(' + x(data[5].Date) + ',' + y(d[5][1]) + ')'; })
 			  .attr('x', -6) 
@@ -227,16 +227,16 @@
 			  .text(function(d) { return d.key; })
 			  .attr('fill-opacity', 1);
 			
-			g2.append('g')
+			svg2.append('g')
 			  .attr('class', 'x axis')
 			  .attr('transform', 'translate(0,' + height + ')')
 			  .call(xAxis);
 
-		  	g2.append('g')
+		  	svg2.append('g')
 			  .attr('class', 'y axis')
 			  .call(yAxis);
 
-		  	g2.append ("text")
+		  	svg2.append ("text")
 				.attr("x", 0-margin.left)
 				.text("Year")
 			
