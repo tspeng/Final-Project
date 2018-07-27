@@ -192,7 +192,7 @@
 					
 			var area = d3.area()
     			.x(function(d) { 
-      				return x(d.data.date); })
+      				return x(d.data.Date); })
     			.y0(function(d) { return y(d[0]); })
     			.y1(function(d) { return y(d[1]); })
 			
@@ -220,7 +220,7 @@
 			
 			g2.append('text')
 			  .datum(function(d) { return d; })
-			  .attr('transform', function(d) { return 'translate(' + x(data[5].date) + ',' + y(d[5][1]) + ')'; })
+			  .attr('transform', function(d) { return 'translate(' + x(data[5].Date) + ',' + y(d[5][1]) + ')'; })
 			  .attr('x', -6) 
 			  .attr('dy', '.35em')
 			  .style("text-anchor", "start")
@@ -240,7 +240,7 @@
 				.attr("x", 0-margin.left)
 				.text("Year")
 			
-			
+			/*
 			//g2 x-axis
 			g2.append("g")
 				  .attr("class", "axis")
@@ -268,7 +268,7 @@
 			  	.attr("text-anchor", "middle")
 			  	.attr("transform", "rotate(-90)")
 			  	.text("Number of Records");	  	
-			  	
+			  */	
 			  	
 			//g2 legend  	
 		  	var legend = g2.append("g")
@@ -291,7 +291,7 @@
 			  	
 			  	
 			  	
-			  	
+			//////////////////Plot 3//////////////////////////////////  	
   
   
 			keys=["Male","Female"];
