@@ -240,14 +240,8 @@
 			g3.append("g")
 				  .attr("class", "axis")
 				  .attr("transform", "translate(0," + height + ")")
-				  .call(d3.axisBottom(x));
-			
-			console.log(width);	  
-			console.log(height);
-			console.log(margin);
-			
-			
-			g3.append("text")             
+				  .call(d3.axisBottom(x))
+			      .append("text")             
 				  .attr("x", width/2)
 				  .attr("y",  height+margin.bottom)
 				  .attr("fill", "#000")
@@ -269,7 +263,6 @@
 			  	.text("Number of Records");
 		  	var legend = g3.append("g")
 			  	.attr("font-family", "sans-serif")
-			  	.attr("font-size", 10)
 			  	.attr("text-anchor", "end")
 			.selectAll("g")
 			.data(keys.slice().reverse())
