@@ -203,6 +203,7 @@
   			y.domain([0, d3.max(yearageCount, function(d) { return d.total; })]).nice();
   			z.domain(keys);
   			
+			console.log(d3.stack().keys(keys)(yearageCount))
 			
 			svg2.selectAll("g")
 				.data(d3.stack().keys(keys)(yearageCount))
