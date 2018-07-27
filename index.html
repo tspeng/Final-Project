@@ -205,7 +205,7 @@
   			
 			
 			svg2.selectAll("g")
-				.data(d3.stack.keys(keys)(yearageCount))
+				.data(d3.stack().keys(keys)(yearageCount))
 				.enter().append("g")
 				.attr('fill-opacity', 0.5);
 			
