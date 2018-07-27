@@ -181,10 +181,14 @@
 				  .attr("y", function(d) { return y(d[1]); })
 				  .attr("height", function(d) { return y(d[0]) - y(d[1]); })
 				  .attr("width", x.bandwidth());
+			
+			//g2 x-axis
 			g2.append("g")
 				  .attr("class", "axis")
 				  .attr("transform", "translate(0," + height + ")")
 				  .call(d3.axisBottom(x));
+				  
+			//g2 y-axis
 		  	g2.append("g")
 			  	.attr("class", "axis")
 			  	.call(d3.axisLeft(y).ticks(null, "s"))
@@ -199,7 +203,7 @@
 			  	.text("Number of Records");	  	
 			  	
 			  	
-			  	
+			//g2 legend  	
 		  	var legend = g2.append("g")
 			  	.attr("font-family", "sans-serif")
 			  	.attr("text-anchor", "end")
@@ -208,15 +212,19 @@
 			.enter().append("g")
 			  	.attr("transform", function(d, i) { return "translate(0," + i * 20 + ")"; });
 		  	legend.append("rect")
-			  	.attr("x", width - 19)
+			  	.attr("x", 100)
 			 	 .attr("width", 19)
 			  	.attr("height", 19)
-			  	.attr("fill", z);
+			  	.attr("fill", z); 	
 		  	legend.append("text")
-			  	.attr("x", width - 24)
+			  	.attr("x", 100-5)
 			  	.attr("y", 9.5)
 			  	.attr("dy", "0.32em")
 			  	.text(function(d) { return d; });
+			  	
+			  	
+			  	
+			  	
   
   
 			keys=["Male","Female"];
@@ -239,25 +247,22 @@
 				  .attr("y", function(d) { return y(d[1]); })
 				  .attr("height", function(d) { return y(d[0]) - y(d[1]); })
 				  .attr("width", x.bandwidth());
-				  
+			
+			// g3 x-axis	  
 			g3.append("g")
 				  .attr("class", "axis")
 				  .attr("transform", "translate(0," + height + ")")
 				  .call(d3.axisBottom(x));
-			
-			console.log(width);	  
-			console.log(height);
-			console.log(margin);
-			
-			
+				  
 			g3.append("text")             
 				  .attr("x", width/2)
 				  .attr("y",  height+margin.bottom*0.75)
 				  .attr("fill", "#000")
 			  	  .attr("font-weight", "bold")
 				  .style("text-anchor", "middle")
-				  .text("Race");	  
-				  
+				  .text("Race");	 
+				   
+			//g3 y-axis	  
 		  	g3.append("g")
 			  	.attr("class", "axis")
 			  	.call(d3.axisLeft(y).ticks(null, "s"))
@@ -271,7 +276,7 @@
 			  	.attr("transform", "rotate(-90)")
 			  	.text("Number of Records");
 			  	
-			  	
+			//g3 legend 	
 		  	var legend = g3.append("g")
 			  	.attr("font-family", "sans-serif")
 			  	.attr("text-anchor", "end")
@@ -285,7 +290,7 @@
 			  	.attr("height", 19)
 			  	.attr("fill", z);
 		  	legend.append("text")
-			  	.attr("x", 90)
+			  	.attr("x", 100-5)
 			  	.attr("y", 9.5)
 			  	.attr("dy", "0.32em")
 			  	.text(function(d) { return d; });
