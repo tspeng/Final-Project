@@ -146,7 +146,7 @@ div.tooltip {
 				.style("opacity", 0);
 
 			svg1.selectAll("dot")
-				 .data(filtered)
+				 .data(bubble(root).leaves())
 			   .enter().append("circle")
 				 .attr("r", 5)
 				 .attr("cx", function(d) { return 2*d.x; })
