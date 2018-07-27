@@ -249,7 +249,7 @@
 			
 			g3.append("text")             
 				  .attr("x", width/2)
-				  .attr("y",  height+margin.bottom)
+				  .attr("y",  height+margin.bottom/2)
 				  .attr("fill", "#000")
 			  	  .attr("font-weight", "bold")
 				  .style("text-anchor", "middle")
@@ -267,6 +267,8 @@
 			  	.attr("text-anchor", "middle")
 			  	.attr("transform", "rotate(-90)")
 			  	.text("Number of Records");
+			  	
+			  	
 		  	var legend = g3.append("g")
 			  	.attr("font-family", "sans-serif")
 			  	.attr("text-anchor", "end")
