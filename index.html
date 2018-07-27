@@ -160,29 +160,8 @@ body {
 			}
 			console.log(racesexCount);
 			
-			//Reference: https://bl.ocks.org/mbostock/3886208
-			//////////////////////////////////////////////////////////////////////////////
-			/*
-			keys=["20s","30s","40s","50s","60s","Others"];
-			yearageCount.sort(function(a,b) {return a.Date-b.Date;})
-			x.domain(yearageCount.map(function(d) { return d.Date; }));
-  			y.domain([0, d3.max(yearageCount, function(d) { return d.total; })]).nice();
-  			z.domain(keys);
-
-			 g2.append("g")
-				.selectAll("g")
-				.data(d3.stack().keys(keys)(yearageCount))
-				.enter().append("g")
-				  .attr("fill", function(d) { return z(d.key); })
-				.selectAll("rect")
-				.data(function(d) { return d; })
-				.enter().append("rect")
-				  .attr("x", function(d) { return x(d.data.Date); })
-				  .attr("y", function(d) { return y(d[1]); })
-				  .attr("height", function(d) { return y(d[0]) - y(d[1]); })
-				  .attr("width", x.bandwidth());
-			*/
-			//////////////////////////////////////////////////////////////////////////////
+			//////////////////Plot 2////////////////////////////////// 
+			//https://bl.ocks.org/lorenzopub/0b09968e3d4970d845a5f45ed25595bb
 			keys=["20s","30s","40s","50s","60s","Others"];
 			
 			
@@ -238,7 +217,8 @@ body {
 			  .attr('class', 'y axis')
 			  .call(yAxis);
 			
-			
+			//https://bl.ocks.org/d3noob/23e42c8f67210ac6c678db2cd07a747e
+			//Add labels
 			//g2 x-axis
 			g2.append("text")             
 			  .attr("x", width/2)
@@ -283,8 +263,7 @@ body {
 			  	
 			  	
 			//////////////////Plot 3//////////////////////////////////  	
-  
-  
+  			//Reference: https://bl.ocks.org/mbostock/3886208
 			keys=["Male","Female"];
 			racesexCount.sort(function(a,b) {return a.total-b.total;})
 			x.domain(racesexCount.map(function(d) { return d.Race; }));
