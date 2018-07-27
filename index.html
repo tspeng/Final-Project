@@ -203,10 +203,9 @@
   			y.domain([0, d3.max(yearageCount, function(d) { return d.total; })]).nice();
   			z.domain(keys);
   			
-  			stack.keys(keys);
 			
 			svg2.selectAll("g")
-				.data(stack(yearageCount))
+				.data(d3.stack.keys(keys)(yearageCount))
 				.enter().append("g")
 				.attr('fill-opacity', 0.5);
 			
