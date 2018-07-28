@@ -41,7 +41,8 @@ div.tooltip {
     <script src="https://d3js.org/topojson.v1.min.js"></script></head>
 <body>
 	<h1> Final project: Interactive slideshow </h1>
-	<p>scenes, annotations, parameters, and triggers </p>
+	<h1> Accidental drug related death in Connecticut </h1>
+	<p id="title"> The age, race, and gender distribution for all counties in CT </p>
 	<div>
 		<button id="btn1" class="Slides" style="background-color:orange; padding: 15px 32px;left:20%" onClick="window.location.reload();"> Click me to go back </button>
 	<div>
@@ -183,6 +184,8 @@ div.tooltip {
 				    var element = document.getElementById("btn1");
 				    element.classList.remove("Slides");
 				    
+				    document.getElementById("title").innerHTML = "The age, race, and gender distribution for "+ d.data.key + "county";
+
 					svg1.classed("Slides",true);
 				 	svg2.classed("Slides",false);
 				 	svg3.classed("Slides",false);
