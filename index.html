@@ -42,7 +42,7 @@ div.tooltip {
 <body>
 	<h1> Final project: Interactive slideshow </h1>
 	<p>scenes, annotations, parameters, and triggers </p>
-	<button class="Slides" style="background-color:orange" onclick="goBack"> Go Back </button>
+	<button id="btn1" class="Slides" style="background-color:orange" onClick="window.location.reload();"> Go Back </button>
 	<svg id="scene1"  width="960" height="500"></svg>
 	<svg id="scene2"  width="960" height="500"></svg>
 	<svg id="scene3"  width="960" height="500"></svg>
@@ -177,6 +177,10 @@ div.tooltip {
 					svg2.selectAll("g > *").remove();  //Remove g elements first
 					svg3.selectAll("g > *").remove();  //Remove g elements first
 					createCharts(d.data.key);
+					
+				    var element = document.getElementById("btn1");
+				    element.classList.remove("Slides");
+				    
 					svg1.classed("Slides",true);
 				 	svg2.classed("Slides",false);
 				 	svg3.classed("Slides",false);
