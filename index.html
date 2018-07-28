@@ -182,7 +182,7 @@ div.tooltip {
 			//https://bl.ocks.org/lorenzopub/0b09968e3d4970d845a5f45ed25595bb	
 			function createCharts (county) {
 				
-				if (county===null){
+				if (!county){
 					var filteredcounty=filtered;
 				}else{
 					var filteredcounty=filtered.filter(function(d) {return (d["Death County"] === county);});
