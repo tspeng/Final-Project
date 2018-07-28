@@ -137,10 +137,6 @@ div.tooltip {
       			.style("text-anchor", "middle")
 				.attr("font-size","10px");
 
-
-
-
-
 			var div = d3.select("body").append("div")
 				.attr("class", "tooltip")
 				.style("opacity", 0);
@@ -350,8 +346,9 @@ div.tooltip {
 			//g3 y-axis	  
 		  	g3.append("g")
 			  	.attr("class", "axis")
-			  	.call(d3.axisLeft(y).ticks(null, "s"))
-				.append("text")
+			  	.call(d3.axisLeft(y).ticks(null, "s"));
+			  	
+			g3.append("text")
 			  	.attr("y", 0 - margin.left)
                 .attr("x",0 - (height / 2))
 			  	.attr("dy", "0.32em")
