@@ -44,8 +44,8 @@ div.tooltip {
 	<h1> Final project: Interactive slideshow </h1>
 	<p>scenes, annotations, parameters, and triggers </p>
 	<svg id="scene1"  width="960" height="500"></svg>
-	<svg class="Slides" id="scene2"  width="960" height="500"></svg>
-	<svg class="Slides" id="scene3"  width="960" height="500"></svg>
+	<svg id="scene2"  width="960" height="500"></svg>
+	<svg id="scene3"  width="960" height="500"></svg>
 	
 	<script>	
 		//https://bl.ocks.org/mbostock/3886208
@@ -111,6 +111,9 @@ div.tooltip {
 		    
 		    //Exclude the data without residence County
 		    var filtered = data.filter(function(d) {return (d.Sex !=0 && d.Date >=2012 && d["Death County"]!="USA");});
+		    createCharts();
+		    
+		    
 		    
 		   	var countyCount=d3.nest()
 				.key(function(d){ return d["Death County"]; })
@@ -150,7 +153,7 @@ div.tooltip {
 				 .attr("cx", function(d) { return 2*d.x; })
 				 .attr("cy", function(d) { return d.y; })
 				 .style("opacity", 0)
-				 
+			 
 				 .on("mouseover", function(d) {
 				   div.transition()
 					 .duration(200)
@@ -179,8 +182,12 @@ div.tooltip {
 			//https://bl.ocks.org/lorenzopub/0b09968e3d4970d845a5f45ed25595bb	
 			function createCharts (county) {
 				
-				var filteredcounty=filtered.filter(function(d) {return (d["Death County"] === county);});
-			
+				if (county===null){
+					var filteredcounty=filtered;
+				}else{
+					var filteredcounty=filtered.filter(function(d) {return (d["Death County"] === county);});
+				}
+
 				var yearageCount0 = d3.nest()
 					.key(function(d)    { return formatTime(d.Date); })
 					.rollup(function(d) { 
