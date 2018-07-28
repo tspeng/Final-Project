@@ -172,8 +172,8 @@ div.tooltip {
 					 .duration(500)
 					 .style("opacity", 0);
 					 
-					svg2.selectAll("g > *").remove();
-					svg3.selectAll("g > *").remove(); 
+					svg2.selectAll("g > *").remove();  //Remove g elements first
+					svg3.selectAll("g > *").remove();  //Remove g elements first
 					createCharts(d.data.key);
 					svg1.classed("Slides",true);
 				 	svg2.classed("Slides",false);
