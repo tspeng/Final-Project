@@ -165,9 +165,13 @@ div.tooltip {
 					 .style("opacity", 1);
 				   })
 				 .on("click", function (){
-				    svg1.classed("Slides",true);
-				 	svg2.attr("class","").removeClass("Slides");
-				 	svg3.attr("class","").removeClass("Slides");
+				 	div.transition()
+					 .duration(500)
+					 .style("opacity", 1);
+					 
+					svg1.classed("Slides",true);
+				 	svg2.classed("Slides",false);
+				 	svg3.classed("Slides",false);
 				 }); 
 
 
