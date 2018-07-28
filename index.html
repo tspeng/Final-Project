@@ -232,7 +232,7 @@ div.tooltip {
   			
 			console.log(d3.stack().keys(keys)(yearageCount))
 			
-			var browser=svg2.selectAll(".browser")
+			var browser=g2.selectAll(".browser")
 				.data(d3.stack().keys(keys)(yearageCount))
 				.enter().append("g")
 				.attr('class', function(d){ return 'browser ' + d.key; })
@@ -253,20 +253,20 @@ div.tooltip {
 			  .attr('fill-opacity', 1);
 			  
 			//g2 x-ticks
-			svg2.append('g')
+			g2.append('g')
 			  .attr('class', 'x axis')
 			  .attr('transform', 'translate(' + (-margin.left*1.3) + ',' + height + ')')
 			  .call(xAxis);
 			  
 			//g2 y-ticks
-		  	svg2.append('g')
+		  	g2.append('g')
 			  .attr('class', 'y axis')
 			  .call(yAxis);
 			
 			//https://bl.ocks.org/d3noob/23e42c8f67210ac6c678db2cd07a747e
 			//Add labels
 			//g2 x-axis
-			svg2.append("text")             
+			g2.append("text")             
 			  .attr("x", width/2)
 			  .attr("y",  height+margin.bottom*0.75)
 			  .attr("fill", "#000")
@@ -275,7 +275,7 @@ div.tooltip {
 			  .text("Year");
 				  
 			//g2 y-axis
-		  	svg2.append("text")
+		  	g2.append("text")
 			  .attr("y", 0 - margin.left)
 			  .attr("x",0 - (height / 2))
 			  .attr("dy", "0.32em")
@@ -287,7 +287,7 @@ div.tooltip {
 			  	
 			  	
 			//g2 legend  	
-		  	var legend = svg2.append("g")
+		  	var legend = g2.append("g")
 			  	.attr("font-family", "sans-serif")
 			  	.attr("text-anchor", "end")
 			.selectAll("g")
