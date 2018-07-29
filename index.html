@@ -42,29 +42,30 @@ div.tooltip {
 	<h2 id="title"> Data analysis for all counties in CT </h2>
 	<button id="btn1" style="background-color:green; padding: 15px 32px;left:20%" onClick="showEssay();"> About the Visualization </button>
 	<div id="essayID" class="Slides">
-		<h3> Data Source: </h3>
-		<h3> Interactive Slideshow Components: </h3>
+		<h3>1. Data Source: </h3>
+		<p>The data used in this analysis is downloaded from Data.Gov (https://catalog.data.gov/dataset/accidental-drug-related-deaths-january-2012-sept-2015). As stated on the website, this dataset contains the accidental death associated with drug overdose in Connecticut from 2012 to 2017. The csv format data is selected in this assignment, because it can be easily converted to Microsoft spreadsheet and imported to Tableau. Based on the age, a "Age Group" field is calculated to categorize the age spectrum into bins for every 10 years.</p>
+		<h3>2. Interactive Slideshow Components: </h3>
 		<p> <strong>Scenes:</strong> There are two scenes.</p> 
-		<pre>                1) Scene #1 has a bubble chart, a stacked area chart and a stacked bar for all data</pre>
-		<pre>                2) Scene #2 has a stacked area chart and a stacked bar for a specific county</pre>
+		<pre>          1) Scene #1 has a bubble chart, a stacked area chart and a stacked bar for all data</pre>
+		<pre>          2) Scene #2 has a stacked area chart and a stacked bar for a specific county</pre>
 		
 		<p> <strong>Annotations:</strong> Implemented in the following two ways.</p> 
-		<pre>                1) Tooltip by hovering over individual bubbles in the bubble chart</pre>
-		<pre>                2) Text to show the age group in the stacked area chart </pre>
+		<pre>          1) Tooltip by hovering over individual bubbles in the bubble chart</pre>
+		<pre>          2) Text to show the age group in the stacked area chart </pre>
 		
 	    <p> <strong>Parameters:</strong> Implemented using filters</p> 
-		<pre>                1) Data is filtered by counties</pre>
-		<pre>                2) Data is grouped by setting the age, race, and year parameters </pre>
+		<pre>          1) Data is filtered by counties</pre>
+		<pre>          2) Data is grouped by setting the age, race, and year parameters </pre>
 		
 		<p> <strong>Triggers:</strong> Implemented in the following two ways</p> 
-		<pre>                1) Buttons</pre>
-		<pre>                2) Scene 2 is loaded by clicking the bubble </pre>
-		<h3> Conclusions: </h3>
+		<pre>          1) Buttons</pre>
+		<pre>          2) Scene 2 is loaded by clicking the bubble </pre>
+		<h3>3. Conclusions: </h3>
 		<p> 1. For Connecticut, the number of accidental drug associated death is increasing monotonically over years across different age groups. Age group "30s" constitutes the highest percentage of druge overdose death every year.</p>
-		<p> 2. For different counties, Hartford has the largest number of drug associated deaths followed by New Haven; 
-		<p> 3. Across ethnic and gender groups, white, hispanic white, and black constitute the largest number of drug related deaths; Deaths of men are much more than that of women<p/>
+		<p> 2. For different counties, Hartford has the largest number of drug associated deaths followed by New Haven. 
+		<p> 3. Across ethnic and gender groups, white, hispanic white, and black constitute the largest number of drug related deaths; Deaths of men are much more than that of women.<p/>
 		
-		<h3> References: </h3>
+		<h3>4. References: </h3>
 	    <p> 1. https://bl.ocks.org/mbostock/3886208</p>
 	    <p> 2. http://learnjsdata.com/group_data.html</p>
 	    <p> 3. https://www.w3schools.com/w3css/w3css_slideshow.asp</p>
