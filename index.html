@@ -127,7 +127,7 @@ div.tooltip {
 
 		    data.forEach(function(d){
 		    	if (d["Death County"].length==""){
-		    		d["Death County"]=="Unspecified"
+		    		d["Death County"]="Unspecified"
 		    	}
 		    
 			    d.Date = parseDate(d.Date);
@@ -145,8 +145,6 @@ div.tooltip {
 			    	d.AgeGroup="Others"
 			    }
 		    });
-		    
-		    console.log(data);
 		    
 		    //Exclude the data without residence County
 		    var filtered = data.filter(function(d) {return (d.Sex !=0 && d.Date >=2012 && d["Death County"]!="USA");});
@@ -254,7 +252,6 @@ div.tooltip {
 				for (var i=0;i<yearageCount0.length;i++){
 					yearageCount.push(yearageCount0[i].value)
 				}
-				console.log(yearageCount);
 	
 				var racesexCount0 = d3.nest()
 					.key(function(d)   { return d.Race; })
@@ -272,7 +269,6 @@ div.tooltip {
 				for (var i=0;i<racesexCount0.length;i++){
 					racesexCount.push(racesexCount0[i].value)
 				}
-				console.log(racesexCount);
 			
 
 				keys=["20s","30s","40s","50s","60s","Others"];
@@ -296,9 +292,7 @@ div.tooltip {
 				x.domain(yearageCount.map(function(d) { return d.Date; }));
 				y.domain([0, d3.max(yearageCount, function(d) { return d.total; })]).nice();
 				z.domain(keys);
-			
-				console.log(d3.stack().keys(keys)(yearageCount))
-			
+
 				var browser=g2.selectAll(".browser")
 					.data(d3.stack().keys(keys)(yearageCount))
 					.enter().append("g")
@@ -391,7 +385,6 @@ div.tooltip {
 				y.domain([0, d3.max(racesexCount, function(d) { return d.total; })]).nice();
 				z.domain(keys);
 			
-				console.log(d3.stack().keys(keys)(racesexCount));
 
 				 g3.append("g")
 					.selectAll("g")
