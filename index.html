@@ -456,18 +456,18 @@ div.tooltip {
 					.text(function(d) { return d; });
 			}
 			
-			function showEssay(){
-				var element = document.getElementById("btn2");
-				    element.classList.remove("Slides");
-				    
-				document.getElementById("essayID").classList.remove("Slides");
-				svg1.selectAll("g > *").remove();  //Remove g elements first   
-				svg2.selectAll("g > *").remove();  //Remove g elements first
-				svg3.selectAll("g > *").remove();  //Remove g elements first
-				
-			}
 		});
-
+		
+		function showEssay(){
+			var element = document.getElementById("btn2");
+				element.classList.remove("Slides");
+				
+			document.getElementById("essayID").classList.remove("Slides");
+			svg1.selectAll("g > *").remove();  //Remove g elements first   
+			svg2.selectAll("g > *").remove();  //Remove g elements first
+			svg3.selectAll("g > *").remove();  //Remove g elements first
+			
+		}
 	</script>
 </body>
 </html>
