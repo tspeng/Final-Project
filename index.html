@@ -40,9 +40,41 @@ div.tooltip {
 <body>
 	<h1> Accidental drug related death in Connecticut </h1>
 	<h2 id="title"> Data analysis for all counties in CT </h2>
+	<button id="btn1" style="background-color:green; padding: 15px 32px;left:20%" onClick="showEssay()"> About the Visualization </button>
+	<div id="essayID" class="SLides">
+		<h3> Data Source: </h3>
+		<h3> Interactive Slideshow Components: </h3>
+		<p> <strong>Scenes:</strong> There are two scenes.</p> 
+		<pre>                1) Scene #1 has a bubble chart, a stacked area chart and a stacked bar for all data</pre>
+		<pre>                2) Scene #2 has a stacked area chart and a stacked bar for a specific county</pre>
+		
+		<p> <strong>Annotations:</strong> Implemented in the following two ways.</p> 
+		<pre>                1) Tooltip by hovering over individual bubbles in the bubble chart</pre>
+		<pre>                2) Text to show the age group in the stacked area chart </pre>
+		
+	    <p> <strong>Parameters:</strong> Implemented using filters</p> 
+		<pre>                1) Data is filtered by counties</pre>
+		<pre>                2) Data is grouped by setting the age, race, and year parameters </pre>
+		
+		<p> <strong>Triggers:</strong> Implemented in the following two ways</p> 
+		<pre>                1) Buttons</pre>
+		<pre>                2) Scene 2 is loaded by clicking the bubble </pre>
+		<h3> Conclusions: </h3>
+		<p> 1. For Connecticut, the number of accidental drug associated death is increasing monotonically over years across different age groups. Age group "30s" constitutes the highest percentage of druge overdose death every year.</p>
+		<p> 2. For different counties, Hartford has the largest number of drug associated deaths followed by New Haven; 
+		<p> 3. Across ethnic and gender groups, white, hispanic white, and black constitute the largest number of drug related deaths; Deaths of men are much more than that of women<p/>
+		
+		<h3> References: </h3>
+	    <p> 1. https://bl.ocks.org/mbostock/3886208</p>
+	    <p> 2. http://learnjsdata.com/group_data.html</p>
+	    <p> 3. https://www.w3schools.com/w3css/w3css_slideshow.asp</p>
+		<p> 4. https://bl.ocks.org/lorenzopub/0b09968e3d4970d845a5f45ed25595bb</p>
+		<p> 5. https://bl.ocks.org/d3noob/23e42c8f67210ac6c678db2cd07a747e</p>
+		<p> 6. https://bl.ocks.org/mbostock/3886208</p>
+	</div>	
 	<div>
-		<button id="btn1" class="Slides" style="background-color:orange; padding: 15px 32px;left:20%" onClick="window.location.reload();"> Click me to go back </button>
-	<div>
+		<button id="btn2" class="Slides" style="background-color:orange; padding: 15px 32px;left:20%" onClick="window.location.reload();"> Click me to go back </button>
+	</div>
 	<svg id="scene1"  width="960" height="500"></svg>
 	<svg id="scene2"  width="960" height="500"></svg>
 	<svg id="scene3"  width="960" height="500"></svg>
@@ -178,7 +210,7 @@ div.tooltip {
 					svg3.selectAll("g > *").remove();  //Remove g elements first
 					createCharts(d.data.key);
 					
-				    var element = document.getElementById("btn1");
+				    var element = document.getElementById("btn2");
 				    element.classList.remove("Slides");
 				    
 				    document.getElementById("title").innerHTML = "Data analysis for "+ d.data.key + " county";
@@ -422,6 +454,18 @@ div.tooltip {
 					.attr("y", 9.5)
 					.attr("dy", "0.32em")
 					.text(function(d) { return d; });
+			}
+			
+			function showEssay(){
+				var element = document.getElementById("btn2");
+				    element.classList.remove("Slides");
+				    
+				document.getElementById("essayID").classList.remove("Slides");
+				 
+				svg1.selectAll("g > *").remove();  //Remove g elements first   
+				svg2.selectAll("g > *").remove();  //Remove g elements first
+				svg3.selectAll("g > *").remove();  //Remove g elements first
+				
 			}
 		});
 
