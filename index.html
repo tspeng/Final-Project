@@ -40,9 +40,10 @@ div.tooltip {
 <body>
 	<h1> Accidental drug related death in Connecticut </h1>
 	<h2 id="title"> Data analysis for all counties in CT </h2>
-	<button id="btn1" style="background-color:green; padding: 15px 32px;left:20%" onClick="showEssay();"> About the Visualization </button>
-	<button id="btn2" class="Slides" style="background-color:orange; padding: 15px 32px;right:50%" onClick="window.location.reload();"> Click to Go Back </button>
-
+	<div>
+		<button id="btn1" style="background-color:green; padding: 15px 32px;left:20%" onClick="showEssay();"> About the Visualization </button>
+		<button id="btn2" class="Slides" style="background-color:orange; padding: 15px 32px;right:50%" onClick="window.location.reload();"> Click to Go Back </button>
+	</div>
 	<div id="essayID" class="Slides">
 		<h3>1. Data Source: </h3>
 		<p>The data used in this analysis is downloaded from Data.Gov (https://catalog.data.gov/dataset/accidental-drug-related-deaths-january-2012-sept-2015). As stated on the website, this dataset contains the accidental death associated with drug overdose in Connecticut from 2012 to 2017. The csv format data is selected in this assignment, because it can be easily converted to Microsoft spreadsheet and imported to Tableau. Based on the age, a "Age Group" field is calculated to categorize the age spectrum into bins for every 10 years.</p>
