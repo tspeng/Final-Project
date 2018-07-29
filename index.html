@@ -129,6 +129,10 @@ div.tooltip {
 		    	if (d["Death County"].length==""){
 		    		d["Death County"]="UNSPECIFIED"
 		    	}
+		    	
+		    	if (d.Race.length==""){
+		    		d.Race="UNSPECIFIED"
+		    	}
 		    
 			    d.Date = parseDate(d.Date);
 			    if (d.Age>=20 && d.Age<30){
