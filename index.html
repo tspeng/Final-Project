@@ -39,7 +39,7 @@ div.tooltip {
     <script src="https://d3js.org/topojson.v1.min.js"></script></head>
 <body>
 	<h1> Accidental drug related death in Connecticut </h1>
-	<h2 id="title"> The age, race, and gender distribution for all counties in CT </h2>
+	<h2 id="title"> Data analysis for all counties in CT </h2>
 	<div>
 		<button id="btn1" class="Slides" style="background-color:orange; padding: 15px 32px;left:20%" onClick="window.location.reload();"> Click me to go back </button>
 	<div>
@@ -181,7 +181,7 @@ div.tooltip {
 				    var element = document.getElementById("btn1");
 				    element.classList.remove("Slides");
 				    
-				    document.getElementById("title").innerHTML = "The age, race, and gender distribution for "+ d.data.key + " county";
+				    document.getElementById("title").innerHTML = "Data analysis for "+ d.data.key + " county";
 
 					svg1.classed("Slides",true);
 				 	svg2.classed("Slides",false);
@@ -300,6 +300,16 @@ div.tooltip {
 				  .attr("font-weight", "bold")
 				  .style("text-anchor", "middle")
 				  .text("Year");
+				
+				//g2 title
+				
+				g2.append("text")             
+				  .attr("x", width/2)
+				  .attr("y",  0)
+				  .attr("fill", "#000")
+				  .attr("font-weight", "bold")
+				  .style("text-anchor", "middle")
+				  .text("Drug related deaths distribution across years and age groups");  
 				  
 				//g2 y-axis
 				g2.append("text")
@@ -384,6 +394,15 @@ div.tooltip {
 					.attr("text-anchor", "middle")
 					.attr("transform", "rotate(-90)")
 					.text("Number of Records");
+				
+				//g3 title
+				g3.append("text")             
+				  .attr("x", width/2)
+				  .attr("y",  0)
+				  .attr("fill", "#000")
+				  .attr("font-weight", "bold")
+				  .style("text-anchor", "middle")
+				  .text("Drug related deaths distribution across race and sex");  
 				
 				//g3 legend 	
 				var legend = g3.append("g")
