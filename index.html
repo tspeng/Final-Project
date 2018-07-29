@@ -462,10 +462,11 @@ div.tooltip {
 		});
 		
 		function showEssay(){
-			document.getElementById("title").classList.add("Slides")	
-			
-			var element = document.getElementById("btn2");
-				element.classList.remove("Slides");
+			document.getElementById("title").classList.add("Slides")
+				
+			document.getElementById("btn1").classList.add("Slides");
+			document.getElementById("btn2").classList.remove("Slides");
+
 				
 			document.getElementById("essayID").classList.remove("Slides");
 			svg1.selectAll("g > *").remove();  //Remove g elements first   
