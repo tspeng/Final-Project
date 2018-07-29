@@ -465,11 +465,15 @@ div.tooltip {
 			document.getElementById("btn1").classList.add("Slides");
 			document.getElementById("btn2").classList.remove("Slides");
 
-				
 			document.getElementById("essayID").classList.remove("Slides");
+			
 			svg1.selectAll("g > *").remove();  //Remove g elements first   
 			svg2.selectAll("g > *").remove();  //Remove g elements first
 			svg3.selectAll("g > *").remove();  //Remove g elements first
+			
+			svg1.classed("Slides",true);
+			svg2.classed("Slides",true);
+			svg3.classed("Slides",true);
 			
 		}
 	</script>
