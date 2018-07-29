@@ -126,6 +126,10 @@ div.tooltip {
 	    d3.csv("https://tspeng.github.io/Final-Project/data/Accidental_Drug_Related_Deaths_2012-2017.csv", function(data) {
 
 		    data.forEach(function(d){
+		    	if (d["Death County"].length==""){
+		    		d["Death County"]=="Unspecified"
+		    	}
+		    
 			    d.Date = parseDate(d.Date);
 			    if (d.Age>=20 && d.Age<30){
 			    	d.AgeGroup="20s"
