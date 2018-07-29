@@ -40,8 +40,8 @@ div.tooltip {
 <body>
 	<h1> Accidental drug related death in Connecticut </h1>
 	<h2 id="title"> Data analysis for all counties in CT </h2>
-	<button id="btn1" style="background-color:green; padding: 15px 32px;left:20%" onClick="showEssay()"> About the Visualization </button>
-	<div id="essayID" class="SLides">
+	<button id="btn1" style="background-color:green; padding: 15px 32px;left:20%" onClick="showEssay();"> About the Visualization </button>
+	<div id="essayID" class="Slides">
 		<h3> Data Source: </h3>
 		<h3> Interactive Slideshow Components: </h3>
 		<p> <strong>Scenes:</strong> There are two scenes.</p> 
@@ -461,7 +461,6 @@ div.tooltip {
 				    element.classList.remove("Slides");
 				    
 				document.getElementById("essayID").classList.remove("Slides");
-				 
 				svg1.selectAll("g > *").remove();  //Remove g elements first   
 				svg2.selectAll("g > *").remove();  //Remove g elements first
 				svg3.selectAll("g > *").remove();  //Remove g elements first
