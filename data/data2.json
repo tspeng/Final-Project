@@ -1,4 +1,6 @@
 [
-    {"area" : "regional", "value": 190000},
-    {"area" : "national", "value": 250000}
+    {"name" : "dish1", "value": 0.1},
+    {"name" : "dish2", "value": 0.5},
+    {"name" : "dish3", "value": 0.2},
+    {"name" : "dish4", "value": 0.1}
 ]
