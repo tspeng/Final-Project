@@ -1,6 +1,6 @@
 [
-    {"name" : "dish1", "value": 0.1},
-    {"name" : "dish2", "value": 0.5},
-    {"name" : "dish3", "value": 0.2},
-    {"name" : "dish4", "value": 0.1}
+    {"name" : "dish1", "value": 0.1,"restrank":[{"resname":"restaurant1","resvalue":0.2},{"resname":"restaurant2","resvalue":0.2},{"resname":"restaurant3","resvalue":0.2},{"resname":"restaurant14","resvalue":0.2},{"resname": "restaurant5, "resvalue":0.5}]},
+    {"name" : "dish2", "value": 0.5,"restrank":[{"resname":"restaurant1","resvalue":0.2},{"resname":"restaurant2","resvalue":0.2},{"resname":"restaurant3","resvalue":0.2},{"resname":"restaurant14","resvalue":0.2},{"resname": "restaurant5, "resvalue":0.5}]},
+    {"name" : "dish3", "value": 0.2,"restrank":[{"resname":"restaurant1","resvalue":0.2},{"resname":"restaurant2","resvalue":0.2},{"resname":"restaurant3","resvalue":0.2},{"resname":"restaurant14","resvalue":0.2},{"resname": "restaurant5, "resvalue":0.5}]},
+    {"name" : "dish4", "value": 0.1,"restrank":[{"resname":"restaurant1","resvalue":0.2},{"resname":"restaurant2","resvalue":0.2},{"resname":"restaurant3","resvalue":0.2},{"resname":"restaurant14","resvalue":0.2},{"resname": "restaurant5, "resvalue":0.5}]}
 ]
